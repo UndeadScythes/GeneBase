@@ -1,6 +1,5 @@
 package com.undeadscythes.gedcomstd.record;
 
-import com.undeadscythes.gedcomstd.meta.*;
 import com.undeadscythes.gedform.*;
 
 /**

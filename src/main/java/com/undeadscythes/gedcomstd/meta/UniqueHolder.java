@@ -1,6 +1,6 @@
 package com.undeadscythes.gedcomstd.meta;
 
-import com.undeadscythes.gedcomstd.*;
+import com.undeadscythes.gedcomstd.gedcom.GEDTag;
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.metaturtle.*;
 import com.undeadscythes.tipscript.*;
