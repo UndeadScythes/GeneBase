@@ -1,6 +1,7 @@
 package com.undeadscythes.genebase.comparator;
 
 import com.undeadscythes.genebase.structure.*;
+import com.undeadscythes.metaturtle.*;
 import java.util.*;
 
 /**
@@ -8,7 +9,7 @@ import java.util.*;
  *
  * @author UndeadScythes
  */
-public final class SortByDate implements Comparator<Event> {
+public final class SortByDate implements Comparator<Metadata> {
     /**
      * Earliest {@link Event}s come first.
      */
@@ -30,7 +31,7 @@ public final class SortByDate implements Comparator<Event> {
         //TODO: Implement me
     }
 
-    public int compare(final Event date1, final Event date2) {
+    public int compare(final Metadata data1, final Metadata data2) {
         return 0; //TODO: Implement me
     }
 }
