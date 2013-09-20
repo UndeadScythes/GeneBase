@@ -1,8 +1,7 @@
 package com.undeadscythes.gedcomstd.record;
 
-import com.undeadscythes.gedcomstd.*;
-import com.undeadscythes.gedcomstd.meta.*;
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.gedform.exception.*;
 import com.undeadscythes.metaturtle.*;
 import java.util.*;
 
@@ -13,6 +12,20 @@ import java.util.*;
  */
 public class Individual extends UniqueHolder {
     private static final long serialVersionUID = 1L;
+
+    /**
+     * A preset {@link Individual} that represents an unknown person.
+     */
+    public static final Individual UNKNOWN;
+
+    static {
+        final Cluster cluster = new Cluster(2);
+        try {
+            cluster.add(new LineStruct("0 @@ INDI"));
+            cluster.add(new LineStruct("1 NAME /Unknown/"));
+        } catch (ParsingException ex) {}
+        UNKNOWN = new Individual(cluster);
+    }
 
     private final Map<String, Family> families;
 
