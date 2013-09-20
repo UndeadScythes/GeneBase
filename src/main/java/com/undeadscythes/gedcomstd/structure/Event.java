@@ -1,6 +1,7 @@
 package com.undeadscythes.gedcomstd.structure;
 
-import com.undeadscythes.gedcomstd.gedcom.GEDTag;
+import com.undeadscythes.gedcomstd.*;
+import com.undeadscythes.gedcomstd.meta.*;
 
 /**
  * An {@link Event} is a property that has both a time and place.

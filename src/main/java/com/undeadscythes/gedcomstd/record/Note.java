@@ -1,6 +1,7 @@
 package com.undeadscythes.gedcomstd.record;
 
-import com.undeadscythes.gedcomstd.gedcom.GEDTag;
+import com.undeadscythes.gedcomstd.*;
+import com.undeadscythes.gedcomstd.meta.*;
 import com.undeadscythes.gedform.*;
 
 /**

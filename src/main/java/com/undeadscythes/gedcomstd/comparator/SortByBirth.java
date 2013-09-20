@@ -1,5 +1,6 @@
 package com.undeadscythes.gedcomstd.comparator;
 
+import com.undeadscythes.gedcomstd.record.*;
 import java.util.*;
 
 /**

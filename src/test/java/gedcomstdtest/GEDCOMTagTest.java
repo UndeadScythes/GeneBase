@@ -1,6 +1,6 @@
 package gedcomstdtest;
 
-import com.undeadscythes.gedcomstd.gedcom.GEDTag;
+import com.undeadscythes.gedcomstd.*;
 import org.junit.*;
 
 /**
