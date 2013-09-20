@@ -13,3 +13,7 @@ nb*
 # Maven superfluity #
 
 target
+
+# Project progression #
+
+src/main/java/OLD
