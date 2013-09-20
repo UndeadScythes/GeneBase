@@ -1,4 +1,4 @@
-package com.undeadscythes.gedcomstd;
+package com.undeadscythes.gedcomstd.gedcom;
 
 import java.util.*;
 

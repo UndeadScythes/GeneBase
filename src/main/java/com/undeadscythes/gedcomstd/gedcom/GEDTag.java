@@ -1,5 +1,6 @@
-package com.undeadscythes.gedcomstd;
+package com.undeadscythes.gedcomstd.gedcom;
 
+import com.undeadscythes.gedcomstd.specific.CustomTag;
 import com.undeadscythes.gedcomstd.exception.*;
 import com.undeadscythes.metaturtle.*;
 import java.util.*;
