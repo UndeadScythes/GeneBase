@@ -11,7 +11,7 @@ import com.undeadscythes.tipscript.*;
  *
  * @author UndeadScythes
  */
-public class GeneBase extends MetaTurtle<String> {
+public class GeneBase extends MetaTurtle {
     private static final long serialVersionUID = 1L;
 
     private final GEDCOM gedcom;

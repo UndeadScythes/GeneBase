@@ -8,7 +8,7 @@ import com.undeadscythes.metaturtle.*;
  *
  * @author UndeadScythes
  */
-public class Holder extends Metadata<String> {
+public class Holder extends Metadata {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -19,7 +19,7 @@ public class Holder extends Metadata<String> {
     }
 
     /**
-     * @see Metadata#Metadata(String, Object)
+     * @see Metadata#Metadata(String, String)
      */
     public Holder(final String property, final String value) {
         super(property, value);

@@ -10,11 +10,11 @@ import com.undeadscythes.tipscript.*;
  *
  * @author UndeadScythes
  */
-public class UniqueHolder extends UniqueMeta<String> {
+public class UniqueHolder extends UniqueMeta {
     private static final long serialVersionUID = 1L;
 
     /**
-     * @see UniqueHolder#UniqueHolder(MetaType, UID)
+     * @see UniqueHolder#UniqueHolder(GEDTag, String) UniqueHolder(GEDTag, String)
      */
     public UniqueHolder(final GEDTag type, final String uid) {
         super(type, uid);
