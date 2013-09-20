@@ -1,7 +1,7 @@
 package com.undeadscythes.genebase.specific;
 
 /**
- * A custom {@link GEDTag}.
+ * A custom {@link com.undeadscythes.genebase.gedcom.GEDTag}.
  *
  * @author UndeadScythes
  */

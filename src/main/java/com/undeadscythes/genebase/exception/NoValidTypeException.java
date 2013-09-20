@@ -1,8 +1,8 @@
 package com.undeadscythes.genebase.exception;
 
 /**
- * Thrown when no {@link com.undeadscythes.gedcomstd.GEDType} can be found that
- * matches a given string.
+ * Thrown when no {@link com.undeadscythes.genebase.gedcom.GEDType} can be found
+ * that matches a given string.
  *
  * @author UndeadScythes
  */

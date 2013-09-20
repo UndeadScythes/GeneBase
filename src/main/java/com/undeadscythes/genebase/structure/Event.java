@@ -41,7 +41,7 @@ public class Event extends Holder {
     /**
      * Compare this {@link Event} to another {@link Event} by {@link Date},
      * defaults to
-     * {@link com.undeadscythes.gedcomstd.comparator.SortByDate#INCREASING INCREASING}.
+     * {@link com.undeadscythes.genebase.comparator.SortByDate#INCREASING INCREASING}.
      */
     public int compareTo(final Comparable<Event> event) {
         return 0; //TODO: Implement me
