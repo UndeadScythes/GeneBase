@@ -57,7 +57,7 @@ public class Individual extends UniqueHolder {
      * Get a sorted list of {@link Metadata} with a property equals to the given
      * {@link GEDTag}.
      */
-    public List<Metadata> getData(final GEDTag tag, final Comparator comp) {
+    public List<Metadata> getData(final GEDTag tag, final Comparator<Metadata> comp) {
         final List<Metadata> matches = new ArrayList<Metadata>(0);
         for (Metadata data : this) {
             if (data.equals(tag.getTag())) matches.add(data);
