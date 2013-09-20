@@ -2,7 +2,7 @@ package com.undeadscythes.gedcomstd.structure;
 
 /**
  * This class offers some handy tools for manipulating dates in a way that can
- * be translated in the {@link GEDCOM} form.
+ * be translated in the {@link com.undeadscythes.gedcomstd.GEDCOM} form.
  *
  * @author UndeadScythes
  */

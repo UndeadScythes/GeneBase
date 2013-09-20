@@ -3,7 +3,7 @@ package com.undeadscythes.gedcomstd;
 import java.util.*;
 
 /**
- * The type of relationship between two {@link Individual}s.
+ * The type of relationship between two {@link com.undeadscythes.gedcomstd.record.Individual}s.
  *
  * @author UndeadScythes
  */
