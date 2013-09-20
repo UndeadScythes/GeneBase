@@ -15,6 +15,6 @@ public class Header extends Holder {
      * Load this {@link Header} with the data in the given {@link Cluster}.
      */
     public Header(final Cluster cluster) {
-        super(cluster.popHead(), cluster);
+        super(cluster.pullHead(), cluster);
     }
 }
