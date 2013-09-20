@@ -1,6 +1,7 @@
 package com.undeadscythes.genebase.meta;
 
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.metaturtle.*;
 import com.undeadscythes.tipscript.*;
 

@@ -1,5 +1,6 @@
 package genebasetest;
 
+import com.undeadscythes.genebase.gedcom.*;
 import org.junit.*;
 
 /**

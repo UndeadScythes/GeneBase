@@ -1,8 +1,8 @@
 package com.undeadscythes.genebase;
 
-import com.undeadscythes.genebase.gedcom.GEDCOM;
-import com.undeadscythes.genebase.gedcom.GEDTag;
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.record.*;
 import com.undeadscythes.metaturtle.*;
 import com.undeadscythes.tipscript.*;
 

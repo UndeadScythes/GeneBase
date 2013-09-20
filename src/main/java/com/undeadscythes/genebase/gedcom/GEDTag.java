@@ -1,6 +1,7 @@
 package com.undeadscythes.genebase.gedcom;
 
-import com.undeadscythes.genebase.specific.CustomTag;
+import com.undeadscythes.genebase.exception.*;
+import com.undeadscythes.genebase.specific.*;
 import com.undeadscythes.metaturtle.*;
 import java.util.*;
 

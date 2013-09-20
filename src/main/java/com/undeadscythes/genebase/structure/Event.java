@@ -1,5 +1,8 @@
 package com.undeadscythes.genebase.structure;
 
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.meta.*;
+
 /**
  * An {@link Event} is a property that has both a time and place.
  *

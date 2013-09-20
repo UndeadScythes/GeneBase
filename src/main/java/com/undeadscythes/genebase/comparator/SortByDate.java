@@ -1,5 +1,6 @@
 package com.undeadscythes.genebase.comparator;
 
+import com.undeadscythes.genebase.structure.*;
 import java.util.*;
 
 /**

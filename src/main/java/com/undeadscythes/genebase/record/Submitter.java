@@ -1,6 +1,8 @@
 package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.meta.*;
 
 /**
  * A submitter is a record of an individual who has made a contribution to this

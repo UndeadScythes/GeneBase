@@ -1,6 +1,9 @@
 package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.specific.*;
 import com.undeadscythes.metaturtle.*;
 import java.util.*;
 

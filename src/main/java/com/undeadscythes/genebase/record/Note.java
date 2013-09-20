@@ -1,6 +1,8 @@
 package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.meta.*;
 
 /**
  * A {@link Note} is a brief description about an entity by the author.
