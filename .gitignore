@@ -17,3 +17,7 @@ target
 # Project progression #
 
 src/main/java/OLD
+
+# Dia tempies #
+
+*.dia~
