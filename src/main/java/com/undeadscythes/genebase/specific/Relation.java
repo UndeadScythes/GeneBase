@@ -12,6 +12,9 @@ public enum Relation {
     FATHER,
     BROTHER,
     SISTER,
+    SON,
+    DAUGHTER,
+    FRIEND,
     NONE;
 
     /**
@@ -23,4 +26,9 @@ public enum Relation {
      * {@link #BROTHER BROTHER}, {@link #SISTER SISTER}.
      */
     public static final List<Relation> SIBLING = new ArrayList<Relation>(Arrays.asList(BROTHER, SISTER));
+
+    /**
+     * {@link #SON SON}, {@link #DAUGHTER DAUGHTER}.
+     */
+    public static final List<Relation> CHILD = new ArrayList<Relation>(Arrays.asList(SON, DAUGHTER));
 }
