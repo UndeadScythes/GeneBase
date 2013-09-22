@@ -28,7 +28,9 @@ public class UniqueHolder extends UniqueMeta {
      */
     public UniqueHolder(final RecordType type, final Cluster cluster) {
         this(type, cluster.pullHead().xref);
-        //TODO: Load cluster
+        while (cluster.hasNext()) {
+            add(new Holder(cluster.pullCluster()));
+        }
     }
 
     /**
