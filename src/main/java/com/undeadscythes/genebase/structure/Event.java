@@ -1,7 +1,9 @@
 package com.undeadscythes.genebase.structure;
 
+import com.undeadscythes.gedform.*;
+import com.undeadscythes.genebase.comparator.*;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.holder.*;
 
 /**
  * An {@link Event} is a property that has both a time and place.
@@ -9,33 +11,38 @@ import com.undeadscythes.genebase.meta.*;
  * @author UndeadScythes
  */
 public class Event extends Holder {
+    private static final long serialVersionUID = 1L;
+
+    private Date date;
+    private Place place;
+    private GEDTag type;
+
     /**
-     * Create an {@link Event} with a given {@link String}.
+     * Create an {@link Event} with a given {@link Cluster}.
      */
-    public Event(final String string) {
-        super("", ""); //TODO: Implement me
+    public Event(final Cluster cluster) {
+        super(cluster); //TODO: Implement me
     }
 
     /**
      * Set the {@link Date} this event occurred.
      */
     public void setDate(final Date date) {
-        //TODO: Implement me
+        this.date = date;
     }
 
     /**
      * Get the type of this {@link Event}.
      */
     public void setTag(final GEDTag type) {
-        //TODO: Implement me
+        this.type = type;
     }
 
     /**
      * Get the {@link Date} this event occurred.
      */
     public Date getDate() {
-        //TODO: Implement me
-        return new Date(0, 0, 0);
+        return date;
     }
 
     /**
@@ -43,14 +50,14 @@ public class Event extends Holder {
      * defaults to
      * {@link com.undeadscythes.genebase.comparator.SortByDate#INCREASING INCREASING}.
      */
-    public int compareTo(final Comparable<Event> event) {
-        return 0; //TODO: Implement me
+    public int compareTo(final Event event) {
+        return SortByDate.INCREASING.compare(this, event);
     }
 
     /**
      * Get the {@link Place} this event took place.
      */
     public Place getPlace() {
-        return new Place(); //TODO: Implement me
+        return place;
     }
 }
