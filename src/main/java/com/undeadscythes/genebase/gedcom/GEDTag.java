@@ -31,8 +31,7 @@ public enum GEDTag implements Property {
     BIRT("Birth"),
     BLES("Blessing"),
     /**
-     * Removed in 5.5.1.
-     *
+     * @deprecated Removed in 5.5.1
      * @see #OBJE OBJE
      */
     @Deprecated
@@ -106,7 +105,7 @@ public enum GEDTag implements Property {
      */
     LATI("latitude"),
     /**
-     * Removed in 5.6.
+     * @deprecated Removed in 5.6
      */
     @Deprecated
     LEGA("Legatee"),
@@ -187,8 +186,9 @@ public enum GEDTag implements Property {
     WIFE("Wife"),
     WILL("Will"),
     /**
-     * Added in 5.5.1, removed in 5.6.
+     * Added in 5.5.1.
      *
+     * @deprecated Removed in 5.6
      * @see #URL URL
      */
     @Deprecated
