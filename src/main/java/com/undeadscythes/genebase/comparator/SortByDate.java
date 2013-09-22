@@ -2,6 +2,7 @@ package com.undeadscythes.genebase.comparator;
 
 import com.undeadscythes.genebase.structure.Date;
 import com.undeadscythes.genebase.structure.*;
+import com.undeadscythes.metaturtle.metadata.*;
 import java.util.*;
 
 /**
@@ -9,7 +10,7 @@ import java.util.*;
  *
  * @author UndeadScythes
  */
-public final class SortByDate implements Comparator<Event> {
+public final class SortByDate implements Comparator<Metadata> {
     /**
      * Earliest {@link Event}s come first.
      */
@@ -41,9 +42,9 @@ public final class SortByDate implements Comparator<Event> {
         this.increasing = increasing;
     }
 
-    public int compare(final Event event1, final Event event2) {
-        final Date date1 = event1.getDate();
-        final Date date2 = event2.getDate();
+    public int compare(final Metadata event1, final Metadata event2) {
+        final Date date1 = ((Event)event1).getDate();
+        final Date date2 = ((Event)event2).getDate();
         return increasing ? compare(date1, date2) : compare(date2, date1);
     }
 }
