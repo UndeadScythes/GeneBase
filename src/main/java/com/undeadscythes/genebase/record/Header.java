@@ -1,7 +1,7 @@
 package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
-import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.holder.*;
 
 /**
  * The header contains information about the GEDCOM transmission.
@@ -15,6 +15,6 @@ public class Header extends Holder {
      * Load this {@link Header} with the data in the given {@link Cluster}.
      */
     public Header(final Cluster cluster) {
-        super(cluster.pullHead(), cluster);
+        super(cluster);
     }
 }
