@@ -2,9 +2,9 @@ package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.holder.*;
 import com.undeadscythes.genebase.specific.*;
-import com.undeadscythes.metaturtle.*;
+import com.undeadscythes.metaturtle.unique.*;
 import java.util.*;
 
 /**
@@ -15,15 +15,14 @@ import java.util.*;
 public class Family extends UniqueHolder {
     private static final long serialVersionUID = 1L;
 
-    private final Map<String, Individual> individuals;
+    private final Map<Individual, Relation> members = new HashMap<Individual, Relation>(2);
 
     /**
      * Load this {@link Family} with the data contained in the given
      * {@link Cluster}.
      */
     public Family(final Cluster record) {
-        super(GEDTag.FAM, record);
-        individuals = new HashMap<String, Individual>(0);
+        super(RecordType.FAM, record);
     }
 
     /**
@@ -38,7 +37,10 @@ public class Family extends UniqueHolder {
      * {@link UID}.
      */
     public boolean hasMember(final UID uid) {
-        return individuals.containsKey(uid.toString());
+        for (Individual indi : members.keySet()) {
+            if (indi.getUID().equals(uid)) return true;
+        }
+        return false;
     }
 
     /**
