@@ -6,19 +6,19 @@
 
   <groupId>com.undeadscythes</groupId>
   <artifactId>GeneBase</artifactId>
-  <version>0.0.2</version>
+  <version>0.1.0</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>GEDFORM</artifactId>
-      <version>2.0.0-Alpha</version>
+      <version>2.0.1-Alpha</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>MetaTurtle</artifactId>
-      <version>2.0.0-Alpha</version>
+      <version>2.0.1-Alpha</version>
       <type>jar</type>
     </dependency>
     <dependency>
