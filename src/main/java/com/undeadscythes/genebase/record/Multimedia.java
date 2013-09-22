@@ -2,7 +2,7 @@ package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.holder.*;
 
 /**
  * Multimedia covers a wide variety of encoded embedded objects.
@@ -16,6 +16,6 @@ public class Multimedia extends UniqueHolder {
      * Load this {@link Multimedia} with the data in the given {@link Cluster}.
      */
     public Multimedia(final Cluster cluster) {
-        super(GEDTag.OBJE, cluster);
+        super(RecordType.OBJE, cluster);
     }
 }

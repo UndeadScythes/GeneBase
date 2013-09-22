@@ -2,7 +2,7 @@ package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.holder.*;
 
 /**
  * A {@link Note} is a brief description about an entity by the author.
@@ -16,6 +16,6 @@ public class Note extends UniqueHolder {
      * Load this {@link Note} with the data from the given {@link Cluster}.
      */
     public Note(final Cluster cluster) {
-        super(GEDTag.NOTE, cluster);
+        super(RecordType.NOTE, cluster);
     }
 }

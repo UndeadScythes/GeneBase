@@ -2,7 +2,7 @@ package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.holder.*;
 
 /**
  * A {@link Source} is an object that provides evidence for a property of
@@ -19,7 +19,7 @@ public class Source extends UniqueHolder {
      * Load the {@link Source} with the data in the given {@link Cluster}.
      */
     public Source(final Cluster cluster) {
-        super(GEDTag.SOUR, cluster);
+        super(RecordType.SOUR, cluster);
         repository = null; //TODO: Implement me
     }
 }

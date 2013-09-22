@@ -2,7 +2,7 @@ package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.meta.*;
+import com.undeadscythes.genebase.holder.*;
 
 /**
  * A {@link Submission} provides information about what this
@@ -17,6 +17,6 @@ public class Submission extends UniqueHolder {
      * Load this {@link Submission} with the data in the given {@link Cluster}.
      */
     public Submission(final Cluster cluster) {
-        super(GEDTag.SUBN, cluster);
+        super(RecordType.SUBN, cluster);
     }
 }
