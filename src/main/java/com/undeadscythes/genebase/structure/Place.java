@@ -1,15 +1,20 @@
 package com.undeadscythes.genebase.structure;
 
+import com.undeadscythes.gedform.*;
+import com.undeadscythes.genebase.holder.*;
+
 /**
  * A physical location.
  *
  * @author UndeadScythes
  */
-public class Place {
+public class Place extends Holder {
+    private static final long serialVersionUID = 1L;
+
     /**
-     * Check if this {@link Place} has a value.
+     * Create an {@link Place} with a given {@link Cluster}.
      */
-    public boolean isEmpty() {
-        return true; //TODO: Implement me
+    public Place(final Cluster cluster) {
+        super(cluster); //TODO: Implement me
     }
 }
