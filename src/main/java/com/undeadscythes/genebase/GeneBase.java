@@ -2,9 +2,13 @@ package com.undeadscythes.genebase;
 
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.holder.*;
 import com.undeadscythes.genebase.record.*;
 import com.undeadscythes.metaturtle.*;
+import com.undeadscythes.metaturtle.metadata.*;
+import com.undeadscythes.metaturtle.unique.*;
 import com.undeadscythes.tipscript.*;
+import java.io.*;
 
 /**
  * The GeneBase is a more versatile database-like structure containing the same
@@ -25,7 +29,7 @@ public class GeneBase extends MetaTurtle {
         this.gedcom = gedcom;
         while (gedcom.hasNext()) {
             final Cluster record = gedcom.pullCluster();
-            switch (GEDTag.getByName(record.getTag())) {
+            switch (RecordType.getByName(record.getTag())) {
                 case HEAD:
                     add(new Header(record));
                     break;
@@ -64,8 +68,15 @@ public class GeneBase extends MetaTurtle {
      * Output the contents of this {@link GeneBase} to the file opened in the
      * given {@link TipScript}.
      */
-    public String dump(final TipScript out) {
-        return ""; //TODO: Implement me
+    public void dump(final TipScript out) {
+        for (Metadata data : this) {
+            ((Holder)data).dump(out, "- ");
+        }
+        for (RecordType type : RecordType.values()) {
+            for (UniqueMeta data : getUniqueMeta(type)) {
+                ((UniqueHolder)data).dump(out, "- ");
+            }
+        }
     }
 
     /**
@@ -82,5 +93,15 @@ public class GeneBase extends MetaTurtle {
      */
     public GEDCOM getGEDCOM() {
         return gedcom;
+    }
+
+    @Override
+    public void load(final String path) throws IOException {
+        //TODO: Implement me
+    }
+
+    @Override
+    public void save() {
+        //TODO: Implement me
     }
 }
