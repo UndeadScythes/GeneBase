@@ -18,8 +18,8 @@ public class GEDCOM extends Transmission {
      * Parse a file into this GEDCOM.
      */
     public GEDCOM(final String path) throws ParsingException {
+        super(new File(path));
         file = new File(path);
-        addAll(parse(file));
     }
 
     /**
