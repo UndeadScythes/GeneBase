@@ -15,6 +15,6 @@ public class Place extends Holder {
      * Create an {@link Place} with a given {@link Cluster}.
      */
     public Place(final Cluster cluster) {
-        super(cluster); //TODO: Implement me
+        super(cluster);
     }
 }
