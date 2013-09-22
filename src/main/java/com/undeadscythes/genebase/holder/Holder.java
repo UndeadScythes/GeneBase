@@ -17,7 +17,9 @@ public class Holder extends Metadata {
      */
     public Holder(final Cluster cluster) {
         this(cluster.pullHead().tag, cluster.pullHead().value);
-        //TODO: Load cluster
+        while (cluster.hasNext()) {
+            add(new Holder(cluster.pullCluster()));
+        }
     }
 
     /**
