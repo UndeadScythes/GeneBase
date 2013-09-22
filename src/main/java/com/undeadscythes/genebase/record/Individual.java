@@ -3,8 +3,8 @@ package com.undeadscythes.genebase.record;
 import com.undeadscythes.gedform.*;
 import com.undeadscythes.gedform.exception.*;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.meta.*;
-import com.undeadscythes.metaturtle.*;
+import com.undeadscythes.genebase.holder.*;
+import static java.util.Collections.*;
 import java.util.*;
 
 /**
@@ -24,27 +24,26 @@ public class Individual extends UniqueHolder {
         final Cluster cluster = new Cluster(2);
         try {
             cluster.add(new LineStruct("0 @@ INDI"));
-            cluster.add(new LineStruct("1 NAME /Unknown/"));
+            cluster.add(new LineStruct("1 NAME Unknown"));
         } catch (ParsingException ex) {}
         UNKNOWN = new Individual(cluster);
     }
 
-    private final Map<String, Family> families;
+    private final List<Family> families = new ArrayList<Family>(0);
 
     /**
      * Load this {@link Individual} with the data in the given {@link Cluster}.
      */
     public Individual(final Cluster cluster) {
-        super(GEDTag.INDI, cluster);
-        families = new HashMap<String, Family>(0);
+        super(RecordType.INDI, cluster);
     }
 
     /**
-     * Get a list of {@link Family}s this {@link Individual} is associated
-     * with.
+     * Get an immutable list of {@link Family}s this {@link Individual} is
+     * associated with.
      */
-    public Collection<Family> getFamilies() {
-        return families.values();
+    public List<Family> getFamilies() {
+        return unmodifiableList(families);
     }
 
     /**
@@ -65,19 +64,8 @@ public class Individual extends UniqueHolder {
      *Get the full name of this {@link Individual}.
      */
     public String getFullName() {
-        return ""; //TODO: Implement me
-    }
-
-    /**
-     * Get a sorted list of {@link Metadata} with a property equals to the given
-     * {@link GEDTag}.
-     */
-    public List<Metadata> getData(final GEDTag tag, final Comparator<Metadata> comp) {
-        final List<Metadata> matches = new ArrayList<Metadata>(0);
-        for (Metadata data : this) {
-            if (data.equals(tag.getTag())) matches.add(data);
-        }
-        Collections.sort(matches, comp);
-        return matches;
+        final String given = getGivenName();
+        final String family = getFamilyName();
+        return (given.isEmpty() ? "?" : given) + (family.isEmpty() ? "" : " " + getFamilyName());
     }
 }
