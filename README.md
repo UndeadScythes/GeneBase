@@ -1,4 +1,4 @@
-# GeneBase - 0.1.0 #
+# GeneBase - 0.1.1 #
 
 An implementation of GEDFORM for GEDCOM 5.5.1. GEDCOM may be
 technically dead but everyone still uses it. Its ubiquity is its saving grace.
