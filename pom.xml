@@ -6,19 +6,19 @@
 
   <groupId>com.undeadscythes</groupId>
   <artifactId>GeneBase</artifactId>
-  <version>0.1.1</version>
+  <version>Alpha-1.0</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>GEDFORM</artifactId>
-      <version>2.1.0-Alpha</version>
+      <version>Alpha-2.1</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>MetaTurtle</artifactId>
-      <version>2.0.1-Alpha</version>
+      <version>Alpha-2.1</version>
       <type>jar</type>
     </dependency>
     <dependency>
@@ -30,7 +30,7 @@
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>TipScript</artifactId>
-      <version>3.0.0-Alpha</version>
+      <version>Alpha-3.1</version>
       <type>jar</type>
     </dependency>
   </dependencies>
