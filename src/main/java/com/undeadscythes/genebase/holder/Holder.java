@@ -1,6 +1,7 @@
 package com.undeadscythes.genebase.holder;
 
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.gedform.exception.*;
 import com.undeadscythes.genebase.exception.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.structure.*;
@@ -24,18 +25,24 @@ public class Holder extends Metadata {
         while (cluster.hasNext()) {
             final Cluster next = cluster.pullCluster();
             Property property;
+            final String nextTag;
             try {
-                property = GEDTag.getByName(next.getTag());
+                nextTag = next.getTag();
+            } catch (EmptyClusterException ex) {
+                continue;
+            }
+            try {
+                property = GEDTag.getByName(nextTag);
             } catch (NoValidTagException ex) {
-                final CustomTag custom = new CustomTag(next.getTag());
+                final CustomTag custom = new CustomTag(nextTag);
                 GEDTag.addTag(custom);
                 property = custom;
             }
-            if (GEDTag.DATE.equals(next.getTag())) {
+            if (GEDTag.DATE.equals(nextTag)) {
                 meta.add(Date.parseDate(next));
             } else if (Event.EVENT_TAGS.contains(property)) {
                 meta.add(new Event(next));
-            } else if (GEDTag.PLAC.equals(next.getTag())) {
+            } else if (GEDTag.PLAC.equals(nextTag)) {
                 meta.add(new Place(next));
             } else {
                 meta.add(new Holder(next));

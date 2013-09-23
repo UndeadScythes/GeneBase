@@ -1,6 +1,7 @@
 package com.undeadscythes.genebase;
 
 import com.undeadscythes.gedform.*;
+import com.undeadscythes.gedform.exception.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.holder.*;
 import com.undeadscythes.genebase.record.*;
@@ -11,8 +12,8 @@ import com.undeadscythes.tipscript.*;
 import java.io.*;
 
 /**
- * The GeneBase is a more versatile database-like structure containing the same
- * information as the {@link GEDCOM}.
+ * The {@link GeneBase} is a more versatile database-like structure containing
+ * the same information as the {@link GEDCOM}.
  *
  * @author UndeadScythes
  */
@@ -29,7 +30,13 @@ public class GeneBase extends MetaTurtle {
         this.gedcom = gedcom;
         while (gedcom.hasNext()) {
             final Cluster record = gedcom.pullCluster();
-            switch (RecordType.getByName(record.getTag())) {
+            final String tag;
+            try {
+                tag = record.getTag();
+            } catch (EmptyClusterException ex) {
+                continue;
+            }
+            switch (RecordType.getByName(tag)) {
                 case HEAD:
                     add(new Header(record));
                     break;
