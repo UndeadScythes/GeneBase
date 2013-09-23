@@ -1,4 +1,4 @@
-# GeneBase - Alpha-1.0 #
+# GeneBase - Alpha-1.1-SNAPSHOT #
 
 An implementation of GEDFORM for GEDCOM 5.5.1. GEDCOM may be
 technically dead but everyone still uses it. Its ubiquity is its saving grace.

@@ -6,7 +6,7 @@
 
   <groupId>com.undeadscythes</groupId>
   <artifactId>GeneBase</artifactId>
-  <version>Alpha-1.0</version>
+  <version>Alpha-1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
@@ -106,7 +106,7 @@ There may in the future be an XML based implementation similar to GEDCOM but
 until that time and even, in my opinion, when that time has come and gone the
 original GEDCOM standard will remain as the most commonly used transmission
 standard of this sort.</description>
-  <url>https://github.com/UndeadScythes/GEDCOMStd</url>
+  <url>https://github.com/UndeadScythes/GEDFORM</url>
   <inceptionYear>2012</inceptionYear>
   <licenses>
     <license>
