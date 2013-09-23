@@ -4,6 +4,9 @@ import com.undeadscythes.gedform.*;
 import com.undeadscythes.genebase.comparator.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.holder.*;
+import com.undeadscythes.genebase.structure.Date;
+import com.undeadscythes.metaturtle.metadata.*;
+import java.util.*;
 
 /**
  * An {@link Event} is a property that has both a time and place.
@@ -12,6 +15,8 @@ import com.undeadscythes.genebase.holder.*;
  */
 public class Event extends Holder {
     private static final long serialVersionUID = 1L;
+
+    public static final List<Property> EVENT_TAGS = new ArrayList<Property>(Arrays.asList(GEDTag.BIRT, GEDTag.EVEN));
 
     private Date date;
     private Place place;
