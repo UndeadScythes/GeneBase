@@ -37,4 +37,11 @@ public final class SortByName implements Comparator<Individual> {
         final String given2 = indi2.getGivenName();
         return ascending ? given1.compareTo(given2) : given2.compareTo(given1);
     }
+
+    /**
+     * Sort a list using this {@link SortByName}.
+     */
+    public void sort(final List<Individual> coll) {
+        Collections.sort(coll, this);
+    }
 }

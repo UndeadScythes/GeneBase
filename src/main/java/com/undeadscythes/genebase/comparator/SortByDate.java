@@ -30,7 +30,7 @@ public final class SortByDate implements Comparator<Metadata> {
      */
     public static int compare(final Date date1, final Date date2) {
         if (date1.year != date2.year) return date1.year - date2.year;
-        if (date1.month != date2.month) return date1.month - date2.month;
+        if (!date1.month.equals(date2.month)) return date1.month.compareTo(date2.month);
         if (date1.quarter != date2.quarter) return date1.quarter - date2.quarter;
         if (date1.day != date2.day) return date1.day - date2.day;
         return 0;
@@ -46,5 +46,12 @@ public final class SortByDate implements Comparator<Metadata> {
         final Date date1 = ((Event)event1).getDate();
         final Date date2 = ((Event)event2).getDate();
         return increasing ? compare(date1, date2) : compare(date2, date1);
+    }
+
+    /**
+     * Sort a list using this {@link SortByName}.
+     */
+    public void sort(final List<Metadata> coll) {
+        Collections.sort(coll, this);
     }
 }

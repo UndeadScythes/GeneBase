@@ -47,4 +47,11 @@ public final class SortByBirth implements Comparator<Individual> {
         }
         return ascending ? SortByDate.INCREASING.compare(birth1, birth2) : SortByDate.DECREASING.compare(birth1, birth2);
     }
+
+    /**
+     * Sort a list using this {@link SortByName}.
+     */
+    public void sort(final List<Individual> coll) {
+        Collections.sort(coll, this);
+    }
 }
