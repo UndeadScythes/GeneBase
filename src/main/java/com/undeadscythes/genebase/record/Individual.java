@@ -4,7 +4,6 @@ import com.undeadscythes.gedform.*;
 import com.undeadscythes.gedform.exception.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.holder.*;
-import static java.util.Collections.*;
 import java.util.*;
 
 /**
@@ -43,7 +42,7 @@ public class Individual extends UniqueHolder {
      * associated with.
      */
     public List<Family> getFamilies() {
-        return unmodifiableList(families);
+        return Collections.unmodifiableList(families);
     }
 
     /**

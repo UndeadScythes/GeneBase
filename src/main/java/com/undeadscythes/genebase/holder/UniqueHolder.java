@@ -5,7 +5,6 @@ import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.metaturtle.metadata.*;
 import com.undeadscythes.metaturtle.unique.*;
 import com.undeadscythes.tipscript.*;
-import static java.util.Collections.*;
 import java.util.*;
 
 /**
@@ -28,9 +27,7 @@ public class UniqueHolder extends UniqueMeta {
      */
     public UniqueHolder(final RecordType type, final Cluster cluster) {
         this(type, cluster.pullHead().xref);
-        while (cluster.hasNext()) {
-            add(new Holder(cluster.pullCluster()));
-        }
+        Holder.load(this, cluster);
     }
 
     /**
@@ -53,7 +50,7 @@ public class UniqueHolder extends UniqueMeta {
         for (Metadata data : this) {
             if (data.equals(property.getString())) matches.add(data);
         }
-        sort(matches, comp);
+        Collections.sort(matches, comp);
         return matches;
     }
 }
