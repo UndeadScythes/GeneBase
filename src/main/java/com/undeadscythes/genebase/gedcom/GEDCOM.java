@@ -23,6 +23,14 @@ public class GEDCOM extends Transmission {
     }
 
     /**
+     * Parse a file with a given encoding into this GEDCOM.
+     */
+    public GEDCOM(final String path, final String encoding) throws ParsingException, UnsupportedEncodingException {
+        super(new File(path), encoding);
+        file = new File(path);
+    }
+
+    /**
      * Get the file this GEDCOM was loaded from.
      */
     public File getFile() {
