@@ -18,7 +18,7 @@
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>MetaTurtle</artifactId>
-      <version>Alpha-2.1</version>
+      <version>Alpha-2.2-SNAPSHOT</version>
       <type>jar</type>
     </dependency>
     <dependency>
