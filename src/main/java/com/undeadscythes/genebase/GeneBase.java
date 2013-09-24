@@ -91,7 +91,14 @@ public class GeneBase extends MetaTurtle {
      * the file given in the {@link TipScript}.
      */
     public void save(final TipScript out) {
-        //TODO: Implement me
+        for (Metadata data : this) {
+            ((Holder)data).save(out, 0);
+        }
+        for (RecordType type : RecordType.values()) {
+            for (UniqueMeta data : getUniqueMeta(type)) {
+                ((UniqueHolder)data).save(out, 0);
+            }
+        }
     }
 
     /**

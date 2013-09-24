@@ -96,4 +96,16 @@ public class Holder extends Metadata {
             ((Holder)data).dump(out, "  " + prefix);
         }
     }
+
+    /**
+     * Save the contents of this {@link Holder} to a {@link GEDCOM} format in
+     * the file given in the {@link TipScript}.
+     */
+    public void save(final TipScript out, final int level) {
+        final String value = getValue().replaceAll("@", "@@");
+        out.printf(level + " " + getProperty() + (value.isEmpty() ? "" : " " + value));
+        for (Metadata data : this) {
+            ((Holder)data).save(out, level + 1);
+        }
+    }
 }

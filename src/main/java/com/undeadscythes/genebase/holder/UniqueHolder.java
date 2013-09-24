@@ -53,4 +53,15 @@ public class UniqueHolder extends UniqueMeta {
         Collections.sort(matches, comp);
         return matches;
     }
+
+    /**
+     * Save the contents of this {@link UniqueHolder} to a {@link GEDCOM} format
+     * in the file given in the {@link TipScript}.
+     */
+    public void save(final TipScript out, final int level) {
+        out.printf(level + " @" + getUID() + "@ " + getType());
+        for (Metadata data : this) {
+            ((Holder)data).save(out, level + 1);
+        }
+    }
 }
