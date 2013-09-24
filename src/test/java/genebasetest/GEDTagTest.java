@@ -11,7 +11,7 @@ public class GEDTagTest extends Assert {
     @Test
     public void testGetByTag() {
         for (Property tag : GEDTag.getValues()) {
-            assertEquals("getByName", tag, GEDTag.getByName(tag.getString()));
+            assertEquals(tag, GEDTag.getByName(tag.getString()));
         }
     }
 }

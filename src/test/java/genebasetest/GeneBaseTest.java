@@ -15,7 +15,7 @@ public class GeneBaseTest {
     @Test
     public void testTGC55C() throws ParsingException {
         final GeneBase geneBase = new GeneBase(new GEDCOM("src/test/resources/TGC55C.ged"));
-        assertFalse("isEmpty()", geneBase.isEmpty());
+        assertFalse(geneBase.isEmpty());
         final TipScript tipScript = new TipScript(Logger.getLogger(getClass().getName()), "Test: ");
         tipScript.openFile("test.ged");
         geneBase.dump(tipScript);
