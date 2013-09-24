@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @author UndeadScythes
  */
-public enum GEDTag implements Property {
+public enum GEDTag implements NamedTag {
     ABBR("Abbreviation"),
     ADDR("Address"),
     ADR1("Address 1"),
@@ -194,10 +194,7 @@ public enum GEDTag implements Property {
     @Deprecated
     WWW("Website");
 
-    /**
-     * The formal name of this {@link Property}.
-     */
-    public final String formal;
+    private final String formal;
 
     private GEDTag(final String formal) {
         this.formal = formal;
@@ -226,19 +223,25 @@ public enum GEDTag implements Property {
     /**
      * Get a {@link Property} matching a given name.
      */
-    public static Property getByName(final String name) {
+    public static NamedTag getByName(final String name) {
         for (Property tag : getValues()) {
-            if (tag.getString().equals(name)) return tag;
+            if (tag.getString().equals(name)) return (NamedTag)tag;
         }
         throw new NoValidTagException(name);
     }
 
+    @Override
     public boolean equals(final String string) {
         return getString().equals(string);
     }
 
-
+    @Override
     public String getString() {
         return name();
+    }
+
+    @Override
+    public String getFormal() {
+        return formal;
     }
 }

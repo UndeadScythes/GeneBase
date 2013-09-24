@@ -1,22 +1,13 @@
 package com.undeadscythes.genebase.gedcom;
 
-import com.undeadscythes.metaturtle.metadata.*;
-
 /**
  * A custom {@link com.undeadscythes.genebase.gedcom.GEDTag}.
  *
  * @author UndeadScythes
  */
-public class CustomTag implements Property {
-    /**
-     * The actual representation of this custom
-     * {@link com.undeadscythes.genebase.gedcom.GEDTag}.
-     */
-    public final String tag;
-    /**
-     * The formal representation of this tag.
-     */
-    public final String formal;
+public class CustomTag implements NamedTag {
+    private final String tag;
+    private final String formal;
 
     /**
      * Create a custom tag with the {@link String} specified.
@@ -34,11 +25,18 @@ public class CustomTag implements Property {
         this.formal = formal;
     }
 
+    @Override
     public boolean equals(final String string) {
         return string.equals(tag);
     }
 
+    @Override
     public String getString() {
         return tag;
+    }
+
+    @Override
+    public String getFormal() {
+        return formal;
     }
 }
