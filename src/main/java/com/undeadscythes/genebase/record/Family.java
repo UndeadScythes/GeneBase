@@ -33,6 +33,37 @@ public class Family extends UniqueHolder {
     }
 
     /**
+     * Get the mother of this family.
+     */
+    public Individual getMother() {
+        for (Map.Entry<Individual, Relation> i : members.entrySet()) {
+            if (i.getValue().equals(Relation.WIFE)) return i.getKey();
+        }
+        return Individual.UNKNOWN;
+    }
+
+    /**
+     * Get the father of this family.
+     */
+    public Individual getFather() {
+        for (Map.Entry<Individual, Relation> i : members.entrySet()) {
+            if (i.getValue().equals(Relation.HUSBAND)) return i.getKey();
+        }
+        return Individual.UNKNOWN;
+    }
+
+    /**
+     * Get the children of this family.
+     */
+    public List<Individual> getChildren() {
+        final List<Individual> children = new ArrayList<Individual>(0);
+        for (Map.Entry<Individual, Relation> i : members.entrySet()) {
+            if (Relation.CHILD.contains(i.getValue())) children.add(i.getKey());
+        }
+        return children;
+    }
+
+    /**
      * Check if this {@link Family} contains an {@link Individual} with a given
      * {@link UID}.
      */
