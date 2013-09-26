@@ -1,7 +1,6 @@
 package com.undeadscythes.genebase;
 
 import com.undeadscythes.gedform.*;
-import com.undeadscythes.gedform.exception.*;
 import com.undeadscythes.genebase.gedcom.*;
 import com.undeadscythes.genebase.holder.*;
 import com.undeadscythes.genebase.record.*;
@@ -30,13 +29,7 @@ public class GeneBase extends MetaTurtle {
         this.gedcom = gedcom;
         while (gedcom.hasNext()) {
             final Cluster record = gedcom.pullCluster();
-            final String tag;
-            try {
-                tag = record.getTag();
-            } catch (EmptyClusterException ex) {
-                continue;
-            }
-            switch (RecordType.getByName(tag)) {
+            switch (RecordType.getByName(record.getTag())) {
                 case HEAD:
                     add(new Header(record));
                     break;
