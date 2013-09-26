@@ -1,8 +1,11 @@
 package com.undeadscythes.genebase.gedcom;
 
-import com.undeadscythes.genebase.exception.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import java.util.*;
+import com.undeadscythes.genebase.exception.NoValidTagException;
+import com.undeadscythes.metaturtle.metadata.Property;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A tag which defines the content of a sub-cluster.
@@ -243,5 +246,10 @@ public enum GEDTag implements NamedTag {
     @Override
     public String getFormal() {
         return formal;
+    }
+
+    @Override
+    public boolean equals(final Property property) {
+        return getString().equals(property.getString());
     }
 }

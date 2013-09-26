@@ -1,5 +1,7 @@
 package com.undeadscythes.genebase.gedcom;
 
+import com.undeadscythes.metaturtle.metadata.Property;
+
 /**
  * A custom {@link com.undeadscythes.genebase.gedcom.GEDTag}.
  *
@@ -38,5 +40,10 @@ public class CustomTag implements NamedTag {
     @Override
     public String getFormal() {
         return formal;
+    }
+
+    @Override
+    public boolean equals(final Property property) {
+        return tag.equals(property.getString());
     }
 }
