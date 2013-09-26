@@ -42,6 +42,17 @@ public class UniqueHolder extends UniqueMeta {
     }
 
     /**
+     * Get the contents of this {@link UniqueHolder}.
+     */
+    public String dump(final String prefix) {
+        final StringBuilder result = new StringBuilder(prefix).append(getType().toString()).append(": ").append(getUID()).append("\n");
+        for (Metadata data : this) {
+            result.append(((Holder)data).dump("  " + prefix));
+        }
+        return result.toString();
+    }
+
+    /**
      * Get a sorted list of {@link Metadata} with a property equals to the given
      * {@link Property}.
      */

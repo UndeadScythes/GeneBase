@@ -1,13 +1,17 @@
 package com.undeadscythes.genebase.holder;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.gedform.exception.*;
-import com.undeadscythes.genebase.exception.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.structure.*;
-import com.undeadscythes.metaturtle.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import com.undeadscythes.tipscript.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.genebase.exception.NoValidTagException;
+import com.undeadscythes.genebase.gedcom.CustomTag;
+import com.undeadscythes.genebase.gedcom.GEDCOM;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.structure.Date;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.genebase.structure.Place;
+import com.undeadscythes.metaturtle.Metadatable;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import com.undeadscythes.metaturtle.metadata.Property;
+import com.undeadscythes.tipscript.TipScript;
 
 /**
  * A convenience wrapper of the {@link Metadata} class.
@@ -26,11 +30,7 @@ public class Holder extends Metadata {
             final Cluster next = cluster.pullCluster();
             Property property;
             final String nextTag;
-            try {
-                nextTag = next.getTag();
-            } catch (EmptyClusterException ex) {
-                continue;
-            }
+            nextTag = next.getTag();
             try {
                 property = GEDTag.getByName(nextTag);
             } catch (NoValidTagException ex) {
@@ -93,8 +93,31 @@ public class Holder extends Metadata {
         }
         out.printf(prefix + getProperty() + ": " + getValue().replace("\n", newLine.toString()));
         for (Metadata data : this) {
-            ((Holder)data).dump(out, "  " + prefix);
+            if (!(data instanceof Holder)) {
+                out.printf("Unreadable metadata: " + data.getProperty() + ": " + data.getValue());
+            } else {
+                ((Holder)data).dump(out, "  " + prefix);
+            }
         }
+    }
+
+    /**
+     * Get the contents of this {@link Holder}.
+     */
+    public String dump(final String prefix) {
+        final StringBuilder newLine = new StringBuilder("\n  ");
+        for (int i = 0; i < prefix.length() + getProperty().length(); i++) {
+            newLine.append(" ");
+        }
+        final StringBuilder result = new StringBuilder(prefix).append(getProperty()).append(": ").append(getValue().replace("\n", newLine.toString())).append("\n");
+        for (Metadata data : this) {
+            if (!(data instanceof Holder)) {
+                result.append("Unreadable metadata: ").append(data.getProperty()).append(": ").append(data.getValue()).append("\n");
+            } else {
+                result.append(((Holder)data).dump("  " + prefix));
+            }
+        }
+        return result.toString();
     }
 
     /**
