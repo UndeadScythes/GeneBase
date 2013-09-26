@@ -1,10 +1,19 @@
 package com.undeadscythes.genebase.record;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.gedform.exception.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.holder.*;
-import java.util.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.gedform.LineStruct;
+import com.undeadscythes.gedform.exception.ParsingException;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.genebase.holder.UniqueHolder;
+import com.undeadscythes.genebase.specific.Gender;
+import com.undeadscythes.genebase.specific.Relation;
+import com.undeadscythes.genebase.structure.Date;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * An individual contains information and events relating to itself.
@@ -46,17 +55,97 @@ public class Individual extends UniqueHolder {
     }
 
     /**
+     * Get families to which this Individual has the given relation.
+     */
+    public List<Family> getFamilies(final Relation relation) {
+        final List<Family> matches = new ArrayList<Family>(0);
+        for (Family family : families) {
+            if (family.getRelation(getUID()).equals(relation)) matches.add(family);
+        }
+        return matches;
+    }
+
+    /**
+     * Get families to which this Individual has the given relations.
+     */
+    public List<Family> getFamilies(final List<Relation> relations) {
+        final List<Family> matches = new ArrayList<Family>(0);
+        for (Family family : families) {
+            if (relations.contains(family.getRelation(getUID()))) matches.add(family);
+        }
+        return matches;
+    }
+
+    /**
+     * Convenience method to get this Individuals' spouse, returns only the
+     * first match found.
+     */
+    public List<Individual> getSpouses() {
+        final List<Individual> spouses = new ArrayList<Individual>(0);
+        final List<Family> matches = getFamilies(Relation.SPOUSE);
+        for (Family family : matches) {
+            if (getGender().equals(Gender.MALE)) spouses.add(family.getMother());
+            if (getGender().equals(Gender.FEMALE)) spouses.add(family.getFather());
+        }
+        return spouses;
+    }
+
+    /**
+     * Convenience method to get this Individuals' father.
+     */
+    public Individual getFather() {
+        final List<Family> matches = getFamilies(Relation.CHILD);
+        if (!matches.isEmpty()) {
+            return matches.get(0).getFather();
+        }
+        return UNKNOWN;
+    }
+
+    /**
+     * Convenience method to get this Individuals' mother.
+     */
+    public Individual getMother() {
+        final List<Family> matches = getFamilies(Relation.CHILD);
+        if (!matches.isEmpty()) {
+            return matches.get(0).getMother();
+        }
+        return UNKNOWN;
+    }
+
+    /**
+     * Convenience method to get this Individuals' children.
+     */
+    public List<Individual> getChildren() {
+        final List<Individual> children = new ArrayList<Individual>(0);
+        final List<Family> matches = getFamilies(Relation.PARENT);
+        for (Family family : matches) {
+            children.addAll(family.getChildren());
+        }
+        return children;
+    }
+
+    /**
      * Get the family name of this {@link Individual}.
      */
     public String getFamilyName() {
-        return ""; //TODO: Implement me
+        try {
+            return getFirst(GEDTag.NAME).getValue().split("/")[1].trim();
+        } catch (NoMetadataSetException ex) {
+            return "";
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            return "";
+        }
     }
 
     /**
      * Get the given name(s) of this {@link Individual}.
      */
     public String getGivenName() {
-        return ""; //TODO: Implement me
+        try {
+            return getFirst(GEDTag.NAME).getValue().split("/")[0].trim();
+        } catch (NoMetadataSetException ex) {
+            return "";
+        }
     }
 
     /**
@@ -66,5 +155,38 @@ public class Individual extends UniqueHolder {
         final String given = getGivenName();
         final String family = getFamilyName();
         return (given.isEmpty() ? "?" : given) + (family.isEmpty() ? "" : " " + getFamilyName());
+    }
+
+    /**
+     * Get the gender of this {@link Individual}.
+     */
+    public Gender getGender() {
+        try {
+            return Gender.getByName(getFirst(GEDTag.SEX).getValue());
+        } catch (NoMetadataSetException ex) {
+            return Gender.UNKNOWN;
+        }
+    }
+
+    /**
+     * Get the birth date of this individual.
+     */
+    public Date getBirth() {
+        try {
+            return ((Event)getFirst(GEDTag.BIRT)).getDate();
+        } catch (NoMetadataSetException ex) {
+            return Date.UNKNOWN;
+        }
+    }
+
+    /**
+     * Get the death date of this individual.
+     */
+    public Date getDeath() {
+        try {
+            return ((Event)getFirst(GEDTag.DEAT)).getDate();
+        } catch (NoMetadataSetException ex) {
+            return Date.UNKNOWN;
+        }
     }
 }
