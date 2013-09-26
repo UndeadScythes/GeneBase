@@ -1,12 +1,15 @@
 package com.undeadscythes.genebase.structure;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.gedform.exception.*;
-import com.undeadscythes.genebase.comparator.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.holder.*;
-import static com.undeadscythes.genebase.specific.DateAccuracy.*;
-import com.undeadscythes.genebase.specific.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.gedform.exception.ParsingException;
+import com.undeadscythes.genebase.comparator.SortByDate;
+import com.undeadscythes.genebase.gedcom.GEDCOM;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.holder.Holder;
+import com.undeadscythes.genebase.specific.DateAccuracy;
+import static com.undeadscythes.genebase.specific.DateAccuracy.BET;
+import static com.undeadscythes.genebase.specific.DateAccuracy.FROM;
+import com.undeadscythes.genebase.specific.Month;
 
 /**
  * This class offers some handy tools for manipulating dates in a way that can
@@ -20,6 +23,11 @@ public class Date extends Holder {
     private final static String MONTH_DATE = "[a-zA-Z]{3,9} " + YEAR_DATE;
     private final static String FULL_DATE = "[0-9]{1,2} " + MONTH_DATE;
     private final static String GED_DATE = "(" + FULL_DATE + "|" + MONTH_DATE + "|" + YEAR_DATE + ")";
+
+    /**
+     * Contains only the string 'Unknown'.
+     */
+    public static final Date UNKNOWN = new Date("Unknown");
 
     /**
      * Parse a {@link Date} from the head of the given {@link String}.
