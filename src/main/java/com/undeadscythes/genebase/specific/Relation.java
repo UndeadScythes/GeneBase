@@ -15,6 +15,8 @@ public enum Relation {
     SON,
     DAUGHTER,
     FRIEND,
+    HUSBAND,
+    WIFE,
     NONE;
 
     /**
@@ -31,4 +33,9 @@ public enum Relation {
      * {@link #SON SON}, {@link #DAUGHTER DAUGHTER}.
      */
     public static final List<Relation> CHILD = new ArrayList<Relation>(Arrays.asList(SON, DAUGHTER));
+
+    /**
+     * {@link #HUSBAND HUSBAND}, {@link #WIFE WIFE}.
+     */
+    public static final List<Relation> SPOUSE = new ArrayList<Relation>(Arrays.asList(HUSBAND, WIFE));
 }
