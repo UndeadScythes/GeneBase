@@ -2,16 +2,15 @@ package com.undeadscythes.genebase.holder;
 
 import com.undeadscythes.gedform.Cluster;
 import com.undeadscythes.genebase.exception.NoValidTagException;
-import com.undeadscythes.genebase.gedcom.CustomTag;
-import com.undeadscythes.genebase.gedcom.GEDCOM;
-import com.undeadscythes.genebase.gedcom.GEDTag;
-import com.undeadscythes.genebase.structure.Date;
-import com.undeadscythes.genebase.structure.Event;
-import com.undeadscythes.genebase.structure.Place;
+import com.undeadscythes.genebase.gedcom.*;
+import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
+import com.undeadscythes.genebase.structure.*;
 import com.undeadscythes.metaturtle.Metadatable;
 import com.undeadscythes.metaturtle.metadata.Metadata;
 import com.undeadscythes.metaturtle.metadata.Property;
 import com.undeadscythes.tipscript.TipScript;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A convenience wrapper of the {@link Metadata} class.
@@ -38,12 +37,8 @@ public class Holder extends Metadata {
                 GEDTag.addTag(custom);
                 property = custom;
             }
-            if (GEDTag.DATE.equals(nextTag)) {
-                meta.add(Date.parseDate(next));
-            } else if (Event.EVENT_TAGS.contains(property)) {
+            if (((NamedTag)property).getType().equals(TagType.EVENT)) {
                 meta.add(new Event(next));
-            } else if (GEDTag.PLAC.equals(nextTag)) {
-                meta.add(new Place(next));
             } else {
                 meta.add(new Holder(next));
             }
@@ -130,5 +125,13 @@ public class Holder extends Metadata {
         for (Metadata data : this) {
             ((Holder)data).save(out, level + 1);
         }
+    }
+
+    public List<Metadata> getListByType(final TagType type) {
+        final List<Metadata> list = new ArrayList<Metadata>(0);
+        for (Metadata data : this) {
+            if (GEDTag.getByName(data.getProperty()).getType().equals(type)) list.add(data);
+        }
+        return list;
     }
 }
