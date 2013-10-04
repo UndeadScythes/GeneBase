@@ -6,19 +6,25 @@
 
   <groupId>com.undeadscythes</groupId>
   <artifactId>GeneBase</artifactId>
-  <version>Alpha-1.1-SNAPSHOT</version>
+  <version>Alpha-1.2-SNAPSHOT</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>GEDFORM</artifactId>
-      <version>Alpha-2.2-SNAPSHOT</version>
+      <version>Beta-1.0</version>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>com.undeadscythes</groupId>
       <artifactId>MetaTurtle</artifactId>
-      <version>Alpha-2.2-SNAPSHOT</version>
+      <version>Beta-1.0</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.undeadscythes</groupId>
+      <artifactId>TipScript</artifactId>
+      <version>Beta-1.0</version>
       <type>jar</type>
     </dependency>
     <dependency>
@@ -26,12 +32,6 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.undeadscythes</groupId>
-      <artifactId>TipScript</artifactId>
-      <version>Alpha-3.1</version>
-      <type>jar</type>
     </dependency>
   </dependencies>
   <properties>
@@ -66,6 +66,7 @@
 	  <execution>
 	    <phase>process-sources</phase>
 	    <goals>
+	      <goal>display-plugin-updates</goal>
 	      <goal>display-dependency-updates</goal>
 	    </goals>
 	  </execution>

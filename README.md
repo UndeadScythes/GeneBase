@@ -1,4 +1,4 @@
-# GeneBase - Alpha-1.1-SNAPSHOT #
+# GeneBase - Alpha-1.2-SNAPSHOT #
 
 An implementation of GEDFORM for GEDCOM 5.5.1. GEDCOM may be
 technically dead but everyone still uses it. Its ubiquity is its saving grace.
@@ -17,4 +17,4 @@ GeneBase source code is released under the CC BY-NC-SA 2.0 UK license.
 A copy of this licence is located in the file named LICENCE.lic, if this file is
 not present the text can be found [here](http://creativecommons.org/licenses/by-nc-sa/2.0/uk/legalcode).
 
-Last edited on 2013-09-23.
+Last edited on 2013-10-04.
