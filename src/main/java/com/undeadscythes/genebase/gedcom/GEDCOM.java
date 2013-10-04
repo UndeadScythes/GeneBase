@@ -1,8 +1,9 @@
 package com.undeadscythes.genebase.gedcom;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.gedform.exception.*;
-import java.io.*;
+import com.undeadscythes.gedform.Transmission;
+import com.undeadscythes.gedform.exception.ParsingException;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 /**
  * The {@link GEDCOM} implements the {@link Transmission}.
@@ -15,7 +16,15 @@ public class GEDCOM extends Transmission {
     private final File file;
 
     /**
-     * Parse a file into this GEDCOM.
+     * Create an empty {@link GEDCOM}.
+     */
+    public GEDCOM() {
+        super(0);
+        file = new File("");
+    }
+
+    /**
+     * Parse a {@link File} into this {@link GEDCOM}.
      */
     public GEDCOM(final String path) throws ParsingException {
         super(new File(path));
@@ -23,7 +32,7 @@ public class GEDCOM extends Transmission {
     }
 
     /**
-     * Parse a file with a given encoding into this GEDCOM.
+     * Parse a {@link File} with a given encoding into this {@link GEDCOM}.
      */
     public GEDCOM(final String path, final String encoding) throws ParsingException, UnsupportedEncodingException {
         super(new File(path), encoding);
@@ -31,15 +40,15 @@ public class GEDCOM extends Transmission {
     }
 
     /**
-     * Get the file this GEDCOM was loaded from.
+     * Get the {@link File} this {@link GEDCOM} was loaded from.
      */
     public File getFile() {
         return file;
     }
 
     /**
-     * Convenience method to get the file name of the file used to load this
-     * GEDCOM.
+     * Convenience method to get the {@link File#getName() file name} of the
+     * {@link File} used to load this {@link GEDCOM}.
      */
     public String getFileName() {
         return file.getName();
