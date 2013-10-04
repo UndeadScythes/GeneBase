@@ -1,9 +1,9 @@
 package com.undeadscythes.genebase.comparator;
 
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.record.*;
-import com.undeadscythes.genebase.structure.*;
-import com.undeadscythes.metaturtle.exception.*;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
+import com.undeadscythes.genebase.record.Individual;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
 import java.util.*;
 
 /**
@@ -36,12 +36,12 @@ public final class SortByBirth implements Comparator<Individual> {
         final Event birth1;
         final Event birth2;
         try {
-            birth1 = (Event)indi1.getFirst(GEDTag.BIRT);
+            birth1 = (Event)indi1.getFirst(Tag.BIRT.getGEDTag());
         } catch (NoMetadataSetException ex) {
             return ascending ? -1 : 1;
         }
         try {
-            birth2 = (Event)indi1.getFirst(GEDTag.BIRT);
+            birth2 = (Event)indi1.getFirst(Tag.BIRT.getGEDTag());
         } catch (NoMetadataSetException ex) {
             return ascending ? 1 : -1;
         }

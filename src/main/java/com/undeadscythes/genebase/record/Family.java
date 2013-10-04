@@ -1,7 +1,7 @@
 package com.undeadscythes.genebase.record;
 
 import com.undeadscythes.gedform.Cluster;
-import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.RecordType;
 import com.undeadscythes.genebase.holder.UniqueHolder;
 import com.undeadscythes.genebase.specific.Gender;
@@ -10,10 +10,7 @@ import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
 import com.undeadscythes.metaturtle.metadata.Metadata;
 import com.undeadscythes.metaturtle.unique.UID;
 import com.undeadscythes.metaturtle.unique.UniqueMeta;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A {@link Family} is a collection of individuals related by parentage.
@@ -105,16 +102,16 @@ public class Family extends UniqueHolder {
      */
     public void setMembers(final Map<UID, UniqueMeta> list) {
         try {
-            final Individual indi = (Individual)list.get(new UID(getFirst(GEDTag.HUSB).getValue()));
+            final Individual indi = (Individual)list.get(new UID(getFirst(Tag.HUSB.getGEDTag()).getValue()));
             indi.addFamily(this);
             members.put(indi, Relation.HUSBAND);
         } catch (NoMetadataSetException ex) {}
         try {
-            final Individual indi = (Individual)list.get(new UID(getFirst(GEDTag.WIFE).getValue()));
+            final Individual indi = (Individual)list.get(new UID(getFirst(Tag.WIFE.getGEDTag()).getValue()));
             indi.addFamily(this);
             members.put(indi, Relation.WIFE);
         } catch (NoMetadataSetException ex) {}
-        for (Metadata child : getList(GEDTag.CHIL)) {
+        for (Metadata child : getList(Tag.CHIL.getGEDTag())) {
             final Individual indi = (Individual)list.get(new UID(child.getValue()));
             indi.addFamily(this);
             if (indi.getGender().equals(Gender.MALE)) {

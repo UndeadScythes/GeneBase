@@ -8,14 +8,36 @@ import com.undeadscythes.metaturtle.metadata.Property;
  *
  * @author UndeadScythes
  */
-public interface NamedTag extends Property {
+public abstract class NamedTag extends Property {
     /**
      * Get the formal name of this {@link NamedTag}.
      */
-    String getFormal();
+    public abstract String getFormal();
 
     /**
      * Get the type of this NamedTag.
      */
-    TagType getType();
+    public abstract TagType getType();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean propertyEquals(final Object obj) {
+        if (obj instanceof String) return ((String)obj).equals(toString());
+        if (obj instanceof Property) return ((Property)obj).toString().equals(toString());
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected abstract int propertyHash();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected abstract String propertyString();
 }

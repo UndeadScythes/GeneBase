@@ -3,7 +3,7 @@ package com.undeadscythes.genebase.record;
 import com.undeadscythes.gedform.Cluster;
 import com.undeadscythes.gedform.LineStruct;
 import com.undeadscythes.gedform.exception.ParsingException;
-import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.RecordType;
 import com.undeadscythes.genebase.holder.UniqueHolder;
 import com.undeadscythes.genebase.specific.Gender;
@@ -176,7 +176,7 @@ public class Individual extends UniqueHolder {
      */
     public String getFamilyName() {
         try {
-            return getFirst(GEDTag.NAME).getValue().split("/")[1].trim();
+            return getFirst(Tag.NAME.getGEDTag()).getValue().split("/")[1].trim();
         } catch (NoMetadataSetException ex) {
             return "";
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -189,7 +189,7 @@ public class Individual extends UniqueHolder {
      */
     public String getGivenName() {
         try {
-            return getFirst(GEDTag.NAME).getValue().split("/")[0].trim();
+            return getFirst(Tag.NAME.getGEDTag()).getValue().split("/")[0].trim();
         } catch (NoMetadataSetException ex) {
             return "";
         }
@@ -209,7 +209,7 @@ public class Individual extends UniqueHolder {
      */
     public Gender getGender() {
         try {
-            return Gender.getByName(getFirst(GEDTag.SEX).getValue());
+            return Gender.getByName(getFirst(Tag.SEX.getGEDTag()).getValue());
         } catch (NoMetadataSetException ex) {
             return Gender.UNKNOWN;
         }
@@ -220,7 +220,7 @@ public class Individual extends UniqueHolder {
      */
     public Date getBirth() {
         try {
-            return ((Event)getFirst(GEDTag.BIRT)).getDate();
+            return ((Event)getFirst(Tag.BIRT.getGEDTag())).getDate();
         } catch (NoMetadataSetException ex) {
             return Date.UNKNOWN;
         }
@@ -231,7 +231,7 @@ public class Individual extends UniqueHolder {
      */
     public Date getDeath() {
         try {
-            return ((Event)getFirst(GEDTag.DEAT)).getDate();
+            return ((Event)getFirst(Tag.DEAT.getGEDTag())).getDate();
         } catch (NoMetadataSetException ex) {
             return Date.UNKNOWN;
         }

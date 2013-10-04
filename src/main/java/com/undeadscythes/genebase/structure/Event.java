@@ -3,6 +3,7 @@ package com.undeadscythes.genebase.structure;
 import com.undeadscythes.gedform.Cluster;
 import com.undeadscythes.genebase.comparator.SortByDate;
 import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.NamedTag;
 import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
@@ -25,9 +26,9 @@ public class Event extends Holder {
         cluster.reset();
         while (cluster.hasNext()) {
             final Cluster next = cluster.pullCluster();
-            if (GEDTag.DATE.equals(next.getTag())) {
+            if (Tag.DATE.getGEDTag().toString().equals(next.getTag())) {
                 date = Date.parseDate(next);
-            } else if (GEDTag.PLAC.equals(next.getTag())) {
+            } else if (Tag.PLAC.getGEDTag().toString().equals(next.getTag())) {
                 place = new Place(next);
             }
         }
@@ -64,6 +65,9 @@ public class Event extends Holder {
         return SortByDate.INCREASING.compare(this, event);
     }
 
+    /**
+     * Get the location that this event took place.
+     */
     public Place getPlace() throws NoMetadataSetException {
         if (date == null) throw new NoMetadataSetException("PLAC");
         return place;

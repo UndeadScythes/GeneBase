@@ -3,15 +3,14 @@ package genebasetest;
 import com.undeadscythes.gedform.exception.ParsingException;
 import com.undeadscythes.genebase.GeneBase;
 import com.undeadscythes.genebase.gedcom.GEDCOM;
-import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.RecordType;
 import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
 import com.undeadscythes.metaturtle.exception.NoUniqueMetaException;
 import com.undeadscythes.metaturtle.unique.UID;
 import com.undeadscythes.tipscript.TipScript;
 import java.util.logging.Logger;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
@@ -26,6 +25,6 @@ public class GeneBaseTest {
         tipScript.openFile("test.ged");
         geneBase.dump(tipScript);
         tipScript.closeFile();
-        assertEquals("Charlie Accented /ANSEL/", geneBase.getUniqueMeta(RecordType.INDI, new UID("I14")).getFirst(GEDTag.NAME).getValue());
+        assertEquals("Charlie Accented /ANSEL/", geneBase.getUniqueMeta(RecordType.INDI, new UID("I14")).getFirst(Tag.NAME.getGEDTag()).getValue());
     }
 }

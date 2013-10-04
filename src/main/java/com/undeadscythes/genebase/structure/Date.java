@@ -3,7 +3,8 @@ package com.undeadscythes.genebase.structure;
 import com.undeadscythes.gedform.Cluster;
 import com.undeadscythes.gedform.exception.ParsingException;
 import com.undeadscythes.genebase.comparator.SortByDate;
-import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDCOM;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.genebase.specific.DateAccuracy;
 import static com.undeadscythes.genebase.specific.DateAccuracy.*;
@@ -11,7 +12,7 @@ import com.undeadscythes.genebase.specific.Month;
 
 /**
  * This class offers some handy tools for manipulating dates in a way that can
- * be translated in the {@link com.undeadscythes.genebase.gedcom.GEDCOM} form.
+ * be translated in the {@link GEDCOM} form.
  *
  * @author UndeadScythes
  */
@@ -67,7 +68,7 @@ public class Date extends Holder {
                 date = new Date(0, Month.UNK, Integer.parseInt(value));
             }
         }
-        load(date, cluster.pullCluster());
+        date.load(cluster.pullCluster());
         return date;
     }
 
@@ -103,7 +104,7 @@ public class Date extends Holder {
      * Create an exact {@link Date} with the given properties.
      */
     public Date(final int day, final Month month, final int year) {
-        super(GEDTag.DATE);
+        super(Tag.DATE.getGEDTag());
         this.year = year;
         this.quarter = ((month.ordinal() % 12) - 1) / 3 + 1;
         this.month = month;
@@ -117,7 +118,7 @@ public class Date extends Holder {
      * Create an approximate {@link Date} with the given properties.
      */
     public Date(final Date date, final DateAccuracy acc) {
-        super(GEDTag.DATE);
+        super(Tag.DATE.getGEDTag());
         this.year = date.year;
         this.quarter = ((date.month.ordinal() % 12) - 1) / 3 + 1;
         this.month = date.month;
@@ -131,7 +132,7 @@ public class Date extends Holder {
      * Create an ranged {@link Date} with the given properties.
      */
     public Date(final Date date1, final Date date2, final DateAccuracy acc) {
-        super(GEDTag.DATE);
+        super(Tag.DATE.getGEDTag());
         this.year = date1.year;
         this.quarter = ((date1.month.ordinal() % 12) - 1) / 3 + 1;
         this.month = date1.month;
@@ -145,7 +146,7 @@ public class Date extends Holder {
      * Create a fallback {@link Date}.
      */
     public Date(final String fallback) {
-        super(GEDTag.DATE);
+        super(Tag.DATE.getGEDTag());
         this.year = 0;
         this.quarter = 0;
         this.month = Month.UNK;
@@ -155,6 +156,9 @@ public class Date extends Holder {
         secondary = null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getValue() {
         if (accuracy.equals(DateAccuracy.PHRASE)) return "(" + phrase + ")";
