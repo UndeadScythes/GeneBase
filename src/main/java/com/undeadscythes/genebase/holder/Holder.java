@@ -137,4 +137,16 @@ public class Holder extends Metadata {
         }
         return list;
     }
+
+    /**
+     * Get the formal name of the property of this {@link Holder}.
+     */
+    public String getFormal() {
+        return ((NamedTag)getProperty()).getFormal();
+    }
+
+    @Override
+    public String toString() {
+        return getValue();
+    }
 }
