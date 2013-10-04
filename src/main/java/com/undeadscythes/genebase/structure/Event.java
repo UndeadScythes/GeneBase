@@ -6,10 +6,6 @@ import com.undeadscythes.genebase.gedcom.GEDTag;
 import com.undeadscythes.genebase.gedcom.NamedTag;
 import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
-import com.undeadscythes.metaturtle.metadata.Property;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * An {@link Event} is a property that has both a time and place.
@@ -18,12 +14,6 @@ import java.util.List;
  */
 public class Event extends Holder {
     private static final long serialVersionUID = 1L;
-
-    public static final List<Property> EVENT_TAGS = new ArrayList<Property>(Arrays.asList(
-            GEDTag.BIRT,
-            GEDTag.DEAT,
-            GEDTag.EVEN,
-            GEDTag.RESI));
 
     private Date date;
     private Place place;
@@ -74,10 +64,21 @@ public class Event extends Holder {
         return SortByDate.INCREASING.compare(this, event);
     }
 
-    /**
-     * Get the {@link Place} this event took place.
-     */
-    public Place getPlace() {
+    public Place getPlace() throws NoMetadataSetException {
+        if (date == null) throw new NoMetadataSetException("PLAC");
         return place;
+    }
+
+    @Override
+    public String toString() {
+        String date = "";
+        String place = "";
+        try {
+            date = getDate().toString();
+        } catch (NoMetadataSetException ex) {}
+        try {
+            place = getPlace().toString();
+        } catch (NoMetadataSetException ex) {}
+        return !date.isEmpty() && !place.isEmpty() ? date + " in " + place : date + place;
     }
 }

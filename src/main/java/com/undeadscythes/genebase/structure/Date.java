@@ -3,12 +3,10 @@ package com.undeadscythes.genebase.structure;
 import com.undeadscythes.gedform.Cluster;
 import com.undeadscythes.gedform.exception.ParsingException;
 import com.undeadscythes.genebase.comparator.SortByDate;
-import com.undeadscythes.genebase.gedcom.GEDCOM;
 import com.undeadscythes.genebase.gedcom.GEDTag;
 import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.genebase.specific.DateAccuracy;
-import static com.undeadscythes.genebase.specific.DateAccuracy.BET;
-import static com.undeadscythes.genebase.specific.DateAccuracy.FROM;
+import static com.undeadscythes.genebase.specific.DateAccuracy.*;
 import com.undeadscythes.genebase.specific.Month;
 
 /**
@@ -193,5 +191,10 @@ public class Date extends Holder {
      */
     public int compareTo(final Date date) {
         return SortByDate.compare(this, date);
+    }
+
+    @Override
+    public String toString() {
+        return getValue();
     }
 }

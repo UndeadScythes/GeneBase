@@ -1,7 +1,7 @@
 package com.undeadscythes.genebase.structure;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.genebase.holder.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.genebase.holder.Holder;
 
 /**
  * A physical location.
@@ -16,5 +16,10 @@ public class Place extends Holder {
      */
     public Place(final Cluster cluster) {
         super(cluster);
+    }
+
+    @Override
+    public String toString() {
+        return getValue();
     }
 }
