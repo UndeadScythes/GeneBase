@@ -1,14 +1,19 @@
 package com.undeadscythes.genebase;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.holder.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.gedform.exception.ParsingException;
+import com.undeadscythes.genebase.gedcom.GEDCOM;
+import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.genebase.holder.Holder;
+import com.undeadscythes.genebase.holder.UniqueHolder;
 import com.undeadscythes.genebase.record.*;
-import com.undeadscythes.metaturtle.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import com.undeadscythes.metaturtle.unique.*;
-import com.undeadscythes.tipscript.*;
-import java.io.*;
+import com.undeadscythes.metaturtle.MetaTurtle;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import com.undeadscythes.metaturtle.unique.UID;
+import com.undeadscythes.metaturtle.unique.UniqueMeta;
+import com.undeadscythes.tipscript.TipScript;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * The {@link GeneBase} is a more versatile database-like structure containing
@@ -19,7 +24,17 @@ import java.io.*;
 public class GeneBase extends MetaTurtle {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * A GeneBase with no stored data.
+     */
+    public static final GeneBase NULL_GENEBASE = new GeneBase(new UID(""));
+
     private final GEDCOM gedcom;
+
+    private GeneBase(final UID uid) {
+        super(uid);
+        gedcom = new GEDCOM();
+    }
 
     /**
      * Load this {@link GeneBase} with the information from a {@link GEDCOM}.
@@ -62,6 +77,25 @@ public class GeneBase extends MetaTurtle {
                 default:
             }
         }
+        for (UniqueMeta family : getUniqueMeta(RecordType.FAM)) {
+            ((Family)family).setMembers(getMap(RecordType.INDI));
+        }
+    }
+
+    /**
+     * Create a new GeneBase from a GEDCOM in a given file.
+     */
+    public GeneBase(final File file) throws ParsingException {
+        super(new UID(file.getName()));
+        gedcom = new GEDCOM(file.getPath());
+    }
+
+    /**
+     * Create an empty GeneBase with a given prefix {@link UID}.
+     */
+    public GeneBase() {
+        super(new UID("Untitled " + new UID().toString()));
+        gedcom = new GEDCOM();
     }
 
     /**
@@ -110,5 +144,14 @@ public class GeneBase extends MetaTurtle {
     @Override
     public void save() {
         //TODO: Implement me
+    }
+
+    /**
+     * Check if this GeneBase has been assigned a 'null' UID.
+     *
+     * @see UID#isNull()
+     */
+    public boolean isNull() {
+        return getUID().isNull();
     }
 }
