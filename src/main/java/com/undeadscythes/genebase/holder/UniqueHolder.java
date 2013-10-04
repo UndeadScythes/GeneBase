@@ -2,9 +2,10 @@ package com.undeadscythes.genebase.holder;
 
 import com.undeadscythes.gedform.Cluster;
 import com.undeadscythes.genebase.exception.NoValidTagException;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.genebase.structure.*;
 import com.undeadscythes.metaturtle.Metadatable;
 import com.undeadscythes.metaturtle.metadata.Metadata;
 import com.undeadscythes.metaturtle.metadata.Property;
@@ -18,7 +19,7 @@ import java.util.*;
  *
  * @author UndeadScythes
  */
-public class UniqueHolder extends UniqueMeta {
+public abstract class UniqueHolder extends UniqueMeta {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -73,8 +74,10 @@ public class UniqueHolder extends UniqueMeta {
             }
             if (tag.getType().equals(TagType.EVENT)) {
                 add(new Event(tag, next));
+            } else if (tag.equals(Tag.NAME.getGEDTag())) {
+                add(new Name(next));
             } else {
-                add(new Holder(tag, next));
+                add(new Fact(tag, next));
             }
         }
     }

@@ -1,6 +1,9 @@
 package com.undeadscythes.genebase.gedcom;
 
 import com.undeadscythes.genebase.exception.NoValidTagException;
+import com.undeadscythes.genebase.holder.Holder;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.genebase.structure.Fact;
 import com.undeadscythes.metaturtle.metadata.Property;
 import java.util.*;
 
@@ -63,27 +66,47 @@ public final class GEDTag extends NamedTag {
         return tag.getFormal();
     }
 
-    /**
-     * Get the type of this GEDTag.
-     */
     @Override
     public TagType getType() {
         return tag.getType();
+    }
+
+    @Override
+    public Class<? extends Holder> getStructure() {
+        return tag.getStructure();
     }
 
     /**
      * Represents a tag type.
      */
     public enum TagType {
-        EVENT,
-        FACT,
+        EVENT(Event.class),
+        FACT(Fact.class),
         SOURCE,
         OTHER,
-        CUSTOM;
+        CUSTOM,
+        RECORD;
+
+        private final Class<? extends Holder> structure;
+
+        private TagType(final Class<? extends Holder> structure) {
+            this.structure = structure;
+        }
+
+        private TagType() {
+            this.structure = Fact.class;
+        }
+
+        /**
+         * Get the generic structure used to hold data of this type.
+         */
+        public Class<? extends Holder> getStructure() {
+            return structure;
+        }
     }
 
     /**
-     * Represents an actual tag text.
+     * Represents an actual written tag.
      */
     public enum Tag {
         ABBR("Abbreviation"),
@@ -172,6 +195,7 @@ public final class GEDTag extends NamedTag {
         GEDC("GEDCOM"),
         GIVN("Given name"),
         GRAD("Graduation", TagType.EVENT),
+        HEAD("Header", TagType.RECORD),
         HUSB("Husband"),
         IDNO("ID number"),
         IMMI("Immigration", TagType.EVENT),
@@ -272,6 +296,7 @@ public final class GEDTag extends NamedTag {
 
         private final String formal;
         private final TagType type;
+        private final Class<? extends Holder> structure;
 
         private Tag(final String formal) {
             this(formal, TagType.OTHER);
@@ -280,6 +305,13 @@ public final class GEDTag extends NamedTag {
         private Tag(final String formal, final TagType type) {
             this.formal = formal;
             this.type = type;
+            structure = type.getStructure();
+        }
+
+        private Tag(final String formal, final TagType type, final Class<? extends Holder> structure) {
+            this.formal = formal;
+            this.type = type;
+            this.structure = structure;
         }
 
         private String getFormal() {
@@ -288,6 +320,13 @@ public final class GEDTag extends NamedTag {
 
         private TagType getType() {
             return type;
+        }
+
+        /**
+         * Get the structure used to hold data of this type.
+         */
+        public Class<? extends Holder> getStructure() {
+            return structure;
         }
 
         /**

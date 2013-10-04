@@ -1,6 +1,8 @@
 package com.undeadscythes.genebase.gedcom;
 
 import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
+import com.undeadscythes.genebase.holder.Holder;
+import com.undeadscythes.genebase.structure.Fact;
 
 /**
  * A custom {@link com.undeadscythes.genebase.gedcom.GEDTag}.
@@ -45,5 +47,10 @@ public class CustomTag extends NamedTag {
     @Override
     protected String propertyString() {
         return tag;
+    }
+
+    @Override
+    public Class<? extends Holder> getStructure() {
+        return Fact.class;
     }
 }

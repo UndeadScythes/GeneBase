@@ -2,13 +2,14 @@ package com.undeadscythes.genebase.holder;
 
 import com.undeadscythes.gedform.Cluster;
 import com.undeadscythes.genebase.exception.NoValidTagException;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
 import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.structure.Event;
 import com.undeadscythes.metaturtle.Metadatable;
 import com.undeadscythes.metaturtle.metadata.Metadata;
 import com.undeadscythes.metaturtle.metadata.Property;
 import com.undeadscythes.tipscript.TipScript;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author UndeadScythes
  */
-public class Holder extends Metadata {
+public abstract class Holder extends Metadata {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -36,6 +37,16 @@ public class Holder extends Metadata {
      */
     public Holder(final NamedTag tag, final Cluster cluster) {
         this(tag, cluster.pullHead().value);
+        load(cluster);
+    }
+
+    /**
+     * Convenience constructor to pass a {@link Tag}.
+     *
+     * @see #Holder(NamedTag, Cluster) Holder(NamedTag, Cluster)
+     */
+    public Holder(final Tag tag, final Cluster cluster) {
+        this(tag.getGEDTag(), cluster.pullHead().value);
         load(cluster);
     }
 
@@ -83,10 +94,20 @@ public class Holder extends Metadata {
                 GEDTag.addTag(custom);
                 tag = custom;
             }
-            if (tag.getType().equals(TagType.EVENT)) {
-                add(new Event(tag, next));
-            } else {
-                add(new Holder(tag, next));
+            try {
+                add(tag.getStructure().getConstructor(Cluster.class).newInstance(next));
+            } catch (NoSuchMethodException ex) {
+                throw new RuntimeException(tag.getFormal(), ex);
+            } catch (SecurityException ex) {
+                throw new RuntimeException(tag.getFormal(), ex);
+            } catch (InstantiationException ex) {
+                throw new RuntimeException(tag.getFormal(), ex);
+            } catch (IllegalAccessException ex) {
+                throw new RuntimeException(tag.getFormal(), ex);
+            } catch (IllegalArgumentException ex) {
+                throw new RuntimeException(tag.getFormal(), ex);
+            } catch (InvocationTargetException ex) {
+                throw new RuntimeException(tag.getFormal(), ex);
             }
         }
     }
@@ -159,8 +180,14 @@ public class Holder extends Metadata {
         return ((NamedTag)getProperty()).getFormal();
     }
 
+    /**
+     * Get a friendly {@link String} representing the value of this
+     * {@link Holder}.
+     */
+    public abstract String getFriendly();
+
     @Override
-    public String toString() {
+    public final String toString() {
         return getValue();
     }
 }

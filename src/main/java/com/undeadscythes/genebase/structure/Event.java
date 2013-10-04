@@ -7,6 +7,7 @@ import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.gedcom.NamedTag;
 import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
+import com.undeadscythes.metaturtle.metadata.Property;
 
 /**
  * An {@link Event} is a property that has both a time and place.
@@ -19,6 +20,14 @@ public class Event extends Holder {
     private Date date;
     private Place place;
     private NamedTag type;
+
+    /**
+     * Construct an arbitrary event.
+     */
+    public Event(final Cluster cluster) {
+        super(GEDTag.getByName(cluster.getTag()), cluster);
+        this.type = (NamedTag)super.getProperty();
+    }
 
     /**
      * Construct an arbitrary event.
@@ -52,6 +61,14 @@ public class Event extends Holder {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Property getProperty() {
+        return type;
+    }
+
+    /**
      * Get the {@link Date} this event occurred.
      */
     public Date getDate() throws NoMetadataSetException {
@@ -77,7 +94,7 @@ public class Event extends Holder {
     }
 
     @Override
-    public String toString() {
+    public String getFriendly() {
         String date = "";
         String place = "";
         try {

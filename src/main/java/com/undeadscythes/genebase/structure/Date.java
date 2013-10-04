@@ -198,7 +198,7 @@ public class Date extends Holder {
     }
 
     @Override
-    public String toString() {
+    public String getFriendly() {
         return getValue();
     }
 }

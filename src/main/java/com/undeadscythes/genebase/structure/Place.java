@@ -1,6 +1,7 @@
 package com.undeadscythes.genebase.structure;
 
 import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
 import com.undeadscythes.genebase.holder.Holder;
 
 /**
@@ -15,11 +16,11 @@ public class Place extends Holder {
      * Create an {@link Place} with a given {@link Cluster}.
      */
     public Place(final Cluster cluster) {
-        super(cluster);
+        super(Tag.PLAC, cluster);
     }
 
     @Override
-    public String toString() {
+    public String getFriendly() {
         return getValue();
     }
 }

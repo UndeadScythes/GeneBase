@@ -1,7 +1,8 @@
 package com.undeadscythes.genebase.record;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.genebase.holder.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.genebase.gedcom.GEDTag.Tag;
+import com.undeadscythes.genebase.holder.Holder;
 
 /**
  * The header contains information about the GEDCOM transmission.
@@ -15,6 +16,11 @@ public class Header extends Holder {
      * Load this {@link Header} with the data in the given {@link Cluster}.
      */
     public Header(final Cluster cluster) {
-        super(cluster);
+        super(Tag.HEAD, cluster);
+    }
+
+    @Override
+    public String getFriendly() {
+        throw new UnsupportedOperationException("Not supported yet."); //TODO: Implement me
     }
 }

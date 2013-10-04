@@ -1,6 +1,7 @@
 package com.undeadscythes.genebase.gedcom;
 
 import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
+import com.undeadscythes.genebase.holder.Holder;
 import com.undeadscythes.metaturtle.metadata.Property;
 
 /**
@@ -40,4 +41,9 @@ public abstract class NamedTag extends Property {
      */
     @Override
     protected abstract String propertyString();
+
+    /**
+     * Convenience method to get this {@link NamedTag NamedTags} structure.
+     */
+    public abstract Class<? extends Holder> getStructure();
 }
