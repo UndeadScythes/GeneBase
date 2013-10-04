@@ -20,9 +20,12 @@ public class Event extends Holder {
     private Place place;
     private NamedTag type;
 
-    public Event(final Cluster cluster) {
-        super(cluster);
-        this.type = GEDTag.getByName(cluster.getTag());
+    /**
+     * Construct an arbitrary event.
+     */
+    public Event(final NamedTag tag, final Cluster cluster) {
+        super(tag, cluster);
+        this.type = tag;
         cluster.reset();
         while (cluster.hasNext()) {
             final Cluster next = cluster.pullCluster();

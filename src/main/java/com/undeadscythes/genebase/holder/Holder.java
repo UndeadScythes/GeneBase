@@ -22,15 +22,29 @@ public class Holder extends Metadata {
 
     /**
      * Load this {@link Holder} with the data in the given {@link Cluster}.
+     *
+     * @deprecated Use {@link #Holder(NamedTag, Cluster) Holder(NamedTag, Cluster)}
      */
+    @Deprecated
     public Holder(final Cluster cluster) {
         this(cluster.pullHead().tag, cluster.pullHead().value);
         load(cluster);
     }
 
     /**
-     * @see Metadata#Metadata(String, String)
+     * Load this {@link Holder} with the data in the given {@link Cluster}.
      */
+    public Holder(final NamedTag tag, final Cluster cluster) {
+        this(tag, cluster.pullHead().value);
+        load(cluster);
+    }
+
+    /**
+     * @see Metadata#Metadata(String, String)
+     *
+     * @deprecated Use {@link #Holder(Property, String) Holder(Property, String)}
+     */
+    @Deprecated
     public Holder(final String property, final String value) {
         super(property, value);
     }
@@ -39,7 +53,7 @@ public class Holder extends Metadata {
      * @see Metadata#Metadata(String, String)
      */
     public Holder(final Property property, final String value) {
-        super(property.toString(), value);
+        super(property, value);
     }
 
     /**
@@ -59,20 +73,20 @@ public class Holder extends Metadata {
     public final void load(final Cluster cluster) {
         while (cluster.hasNext()) {
             final Cluster next = cluster.pullCluster();
-            Property property;
+            NamedTag tag;
             final String nextTag;
             nextTag = next.getTag();
             try {
-                property = GEDTag.getByName(nextTag);
+                tag = GEDTag.getByName(nextTag);
             } catch (NoValidTagException ex) {
                 final CustomTag custom = new CustomTag(nextTag);
                 GEDTag.addTag(custom);
-                property = custom;
+                tag = custom;
             }
-            if (((NamedTag)property).getType().equals(TagType.EVENT)) {
-                add(new Event(next));
+            if (tag.getType().equals(TagType.EVENT)) {
+                add(new Event(tag, next));
             } else {
-                add(new Holder(next));
+                add(new Holder(tag, next));
             }
         }
     }
