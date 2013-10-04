@@ -1,11 +1,19 @@
 package com.undeadscythes.genebase.record;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.genebase.holder.*;
-import com.undeadscythes.genebase.specific.*;
-import com.undeadscythes.metaturtle.unique.*;
-import java.util.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.genebase.holder.UniqueHolder;
+import com.undeadscythes.genebase.specific.Gender;
+import com.undeadscythes.genebase.specific.Relation;
+import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import com.undeadscythes.metaturtle.unique.UID;
+import com.undeadscythes.metaturtle.unique.UniqueMeta;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A {@link Family} is a collection of individuals related by parentage.
@@ -86,6 +94,49 @@ public class Family extends UniqueHolder {
      * {@link UID} has to this {@link Family}.
      */
     public Relation getRelation(final UID uid) {
-        return Relation.NONE; //TODO: Implement me
+        for (Map.Entry<Individual, Relation> i : members.entrySet()) {
+            if (i.getKey().getUID().equals(uid)) return i.getValue();
+        }
+        return Relation.NONE;
+    }
+
+    /**
+     * Link Families to their respective members.
+     */
+    public void setMembers(final Map<UID, UniqueMeta> list) {
+        try {
+            final Individual indi = (Individual)list.get(new UID(getFirst(GEDTag.HUSB).getValue()));
+            indi.addFamily(this);
+            members.put(indi, Relation.HUSBAND);
+        } catch (NoMetadataSetException ex) {}
+        try {
+            final Individual indi = (Individual)list.get(new UID(getFirst(GEDTag.WIFE).getValue()));
+            indi.addFamily(this);
+            members.put(indi, Relation.WIFE);
+        } catch (NoMetadataSetException ex) {}
+        for (Metadata child : getList(GEDTag.CHIL)) {
+            final Individual indi = (Individual)list.get(new UID(child.getValue()));
+            indi.addFamily(this);
+            if (indi.getGender().equals(Gender.MALE)) {
+                members.put(indi, Relation.SON);
+            } else if (indi.getGender().equals(Gender.FEMALE)) {
+                members.put(indi, Relation.DAUGHTER);
+            } else {
+                members.put(indi, Relation.BUDAK);
+            }
+        }
+    }
+
+    /**
+     * Get a parent of this family that is not UNKNOWN.
+     */
+    public Individual getParent() {
+        if (!getFather().equals(Individual.UNKNOWN)) {
+            return getFather();
+        } else if (!getMother().equals(Individual.UNKNOWN)) {
+            return getMother();
+        } else {
+            return Individual.UNKNOWN;
+        }
     }
 }
