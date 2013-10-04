@@ -1,6 +1,8 @@
 package com.undeadscythes.genebase.specific;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The type of relationship between two {@link com.undeadscythes.genebase.record.Individual}s.
@@ -17,6 +19,7 @@ public enum Relation {
     FRIEND,
     HUSBAND,
     WIFE,
+    BUDAK,
     NONE;
 
     /**
@@ -30,9 +33,9 @@ public enum Relation {
     public static final List<Relation> SIBLING = new ArrayList<Relation>(Arrays.asList(BROTHER, SISTER));
 
     /**
-     * {@link #SON SON}, {@link #DAUGHTER DAUGHTER}.
+     * {@link #SON SON}, {@link #DAUGHTER DAUGHTER}, {@link #BUDAK BUDAK}.
      */
-    public static final List<Relation> CHILD = new ArrayList<Relation>(Arrays.asList(SON, DAUGHTER));
+    public static final List<Relation> CHILD = new ArrayList<Relation>(Arrays.asList(SON, DAUGHTER, BUDAK));
 
     /**
      * {@link #HUSBAND HUSBAND}, {@link #WIFE WIFE}.
