@@ -1,10 +1,15 @@
 package com.undeadscythes.genebase.holder;
 
-import com.undeadscythes.gedform.*;
-import com.undeadscythes.genebase.gedcom.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import com.undeadscythes.metaturtle.unique.*;
-import com.undeadscythes.tipscript.*;
+import com.undeadscythes.gedform.Cluster;
+import com.undeadscythes.genebase.gedcom.GEDCOM;
+import com.undeadscythes.genebase.gedcom.GEDTag;
+import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
+import com.undeadscythes.genebase.gedcom.RecordType;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import com.undeadscythes.metaturtle.metadata.Property;
+import com.undeadscythes.metaturtle.unique.UID;
+import com.undeadscythes.metaturtle.unique.UniqueMeta;
+import com.undeadscythes.tipscript.TipScript;
 import java.util.*;
 
 /**
@@ -19,6 +24,13 @@ public class UniqueHolder extends UniqueMeta {
      * Construct a {@link UniqueMeta} with a given {@link RecordType} and UID.
      */
     public UniqueHolder(final RecordType type, final String uid) {
+        super(type, uid);
+    }
+
+    /**
+     * Construct a {@link UniqueMeta} with a given {@link RecordType} and UID.
+     */
+    public UniqueHolder(final RecordType type, final UID uid) {
         super(type, uid);
     }
 
@@ -74,5 +86,13 @@ public class UniqueHolder extends UniqueMeta {
         for (Metadata data : this) {
             ((Holder)data).save(out, level + 1);
         }
+    }
+
+    public List<Metadata> getListByType(final TagType type) {
+        final List<Metadata> list = new ArrayList<Metadata>(0);
+        for (Metadata data : this) {
+            if (GEDTag.getByName(data.getProperty()).getType().equals(type)) list.add(data);
+        }
+        return list;
     }
 }
