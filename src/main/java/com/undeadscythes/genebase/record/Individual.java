@@ -11,9 +11,8 @@ import com.undeadscythes.genebase.specific.Relation;
 import com.undeadscythes.genebase.structure.Date;
 import com.undeadscythes.genebase.structure.Event;
 import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.undeadscythes.metaturtle.unique.UID;
+import java.util.*;
 
 /**
  * An individual contains information and events relating to itself.
@@ -44,6 +43,13 @@ public class Individual extends UniqueHolder {
      */
     public Individual(final Cluster cluster) {
         super(RecordType.INDI, cluster);
+    }
+
+    /**
+     * Load this {@link Individual} with the data in the given {@link Cluster}.
+     */
+    public Individual(final UID uid) {
+        super(RecordType.INDI, uid);
     }
 
     /**
@@ -113,15 +119,56 @@ public class Individual extends UniqueHolder {
     }
 
     /**
+     * Convenience method to get a known parent of this Individual.
+     */
+    public Individual getParent() {
+        final List<Family> matches = getFamilies(Relation.CHILD);
+        if (!matches.isEmpty()) {
+            if (!matches.get(0).getMother().equals(UNKNOWN)) return matches.get(0).getMother();
+            if (!matches.get(0).getFather().equals(UNKNOWN)) return matches.get(0).getFather();
+        }
+        return UNKNOWN;
+    }
+
+    /**
      * Convenience method to get this Individuals' children.
      */
     public List<Individual> getChildren() {
         final List<Individual> children = new ArrayList<Individual>(0);
-        final List<Family> matches = getFamilies(Relation.PARENT);
+        final List<Family> matches = getFamilies(Relation.SPOUSE);
         for (Family family : matches) {
             children.addAll(family.getChildren());
         }
         return children;
+    }
+
+    /**
+     * Convenience method to get this Individuals' children with the given
+     * partner.
+     */
+    public List<Individual> getChildren(final Individual spouse) {
+        if (spouse.equals(UNKNOWN)) return getChildren();
+        final List<Individual> children = new ArrayList<Individual>(0);
+        final List<Family> matches = getFamilies(Relation.SPOUSE);
+        for (Family family : matches) {
+            if (family.hasMember(spouse.getUID())) children.addAll(family.getChildren());
+        }
+        return children;
+    }
+
+    /**
+     * Get this Individuals siblings.
+     */
+    public List<Individual> getSiblings() {
+        final List<Individual> siblings = new ArrayList<Individual>(0);
+        final List<Family> matches = getFamilies(Relation.CHILD);
+        for (Family family : matches) {
+            for (Individual indi : family.getChildren()) {
+                if (indi.getUID().equals(getUID())) continue;
+                siblings.add(indi);
+            }
+        }
+        return siblings;
     }
 
     /**
@@ -188,5 +235,12 @@ public class Individual extends UniqueHolder {
         } catch (NoMetadataSetException ex) {
             return Date.UNKNOWN;
         }
+    }
+
+    /**
+     * Link this Individual to a given Family.
+     */
+    public void addFamily(final Family family) {
+        families.add(family);
     }
 }
