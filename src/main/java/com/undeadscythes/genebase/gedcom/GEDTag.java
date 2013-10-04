@@ -2,10 +2,7 @@ package com.undeadscythes.genebase.gedcom;
 
 import com.undeadscythes.genebase.exception.NoValidTagException;
 import com.undeadscythes.metaturtle.metadata.Property;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * A tag which defines the content of a sub-cluster.
@@ -14,70 +11,70 @@ import java.util.List;
  */
 public enum GEDTag implements NamedTag {
     ABBR("Abbreviation"),
-    ADDR("Address"),
+    ADDR("Address", TagType.FACT),
     ADR1("Address 1"),
     ADR2("Address 2"),
-    ADOP("Adoption"),
+    ADOP("Adoption", TagType.EVENT),
     AFN("Ancestral file number"),
     AGE("Age"),
     AGNC("Agency"),
     ALIA("Alias"),
     ANCE("Ancestors"),
     ANCI("Ancestor interest"),
-    ANUL("Annulment"),
+    ANUL("Annulment", TagType.EVENT),
     ASSO("Associates"),
     AUTH("Author"),
-    BAPL("LDS baptism"),
-    BAPM("Baptism"),
-    BARM("Bar mitzvah"),
-    BASM("Bat mitzvah"),
-    BIRT("Birth"),
-    BLES("Blessing"),
+    BAPL("LDS baptism", TagType.EVENT),
+    BAPM("Baptism", TagType.EVENT),
+    BARM("Bar mitzvah", TagType.EVENT),
+    BASM("Bat mitzvah", TagType.EVENT),
+    BIRT("Birth", TagType.EVENT),
+    BLES("Blessing", TagType.EVENT),
     /**
      * @deprecated Removed in 5.5.1
      * @see #OBJE OBJE
      */
     @Deprecated
     BLOB("Binary object"),
-    BURI("Burial"),
+    BURI("Burial", TagType.EVENT),
     CALN("Call number"),
     CAST("Caste"),
     CAUS("Cause"),
-    CENS("Census"),
+    CENS("Census", TagType.EVENT),
     CHAN("Change"),
     CHAR("Character"),
     CHIL("Child"),
-    CHR("Christening"),
-    CHRA("Adult Christening"),
+    CHR("Christening", TagType.EVENT),
+    CHRA("Adult Christening", TagType.EVENT),
     CITY("City"),
     /**
      * Added in 5.6.
      */
     CLNDR("Calendar type"),
-    CONF("Confirmation"),
-    CONL("LDS confirmation"),
+    CONF("Confirmation", TagType.EVENT),
+    CONL("LDS confirmation", TagType.EVENT),
     COPR("Copyright"),
     CORP("Corporate"),
-    CREM("Cremation"),
+    CREM("Cremation", TagType.EVENT),
     CTRY("Country"),
     DATA("Data"),
     DATE("Date"),
-    DEAT("Death"),
+    DEAT("Death", TagType.EVENT),
     DESC("Descendants"),
     DESI("Descendant interest"),
     DEST("Destination"),
-    DIV("Divorce"),
-    DIVF("Divorce filed"),
+    DIV("Divorce", TagType.EVENT),
+    DIVF("Divorce filed", TagType.EVENT),
     DSCR("Physical description"),
     EDUC("Education"),
     /**
      * Added in 5.5.1.
      */
     EMAIL("Email"),
-    EMIG("Emigration"),
-    ENDL("LDS endowment"),
-    ENGA("Engagement"),
-    EVEN("Event"),
+    EMIG("Emigration", TagType.EVENT),
+    ENDL("LDS endowment", TagType.EVENT),
+    ENGA("Engagement", TagType.EVENT),
+    EVEN("Event", TagType.EVENT),
     /**
      * Added in 5.5.1.
      */
@@ -89,7 +86,7 @@ public enum GEDTag implements NamedTag {
      * Added in 5.5.1.
      */
     FAX("Facimilie"),
-    FCOM("First communion"),
+    FCOM("First communion", TagType.EVENT),
     FILE("File"),
     /**
      * Added in 5.5.1.
@@ -98,15 +95,15 @@ public enum GEDTag implements NamedTag {
     FORM("Format"),
     GEDC("GEDCOM"),
     GIVN("Given name"),
-    GRAD("Graduation"),
+    GRAD("Graduation", TagType.EVENT),
     HUSB("Husband"),
     IDNO("ID number"),
-    IMMI("Immigration"),
+    IMMI("Immigration", TagType.EVENT),
     LANG("Language"),
     /**
      * Added in 5.5.1.
      */
-    LATI("latitude"),
+    LATI("Latitude"),
     /**
      * @deprecated Removed in 5.6
      */
@@ -120,15 +117,15 @@ public enum GEDTag implements NamedTag {
      * Added in 5.5.1.
      */
     MAP("Map"),
-    MARB("Marriage bann"),
-    MARC("Marriage contract"),
-    MARL("Marriage license"),
+    MARB("Marriage bann", TagType.EVENT),
+    MARC("Marriage contract", TagType.EVENT),
+    MARL("Marriage license", TagType.EVENT),
     MARR("Marriage"),
-    MARS("Marriage settlement"),
-    MEDI("media"),
-    NAME("Name"),
+    MARS("Marriage settlement", TagType.EVENT),
+    MEDI("Media"),
+    NAME("Name", TagType.FACT),
     NATI("Nationality"),
-    NATU("naturalization"),
+    NATU("Naturalization", TagType.EVENT),
     NCHI("Number of children"),
     NICK("Nickname"),
     NMR("Number of marriages"),
@@ -138,22 +135,22 @@ public enum GEDTag implements NamedTag {
     OBJE("Object"),
     OCCU("Occupation"),
     ORDI("Ordinance"),
-    ORDN("Ordination"),
+    ORDN("Ordination", TagType.EVENT),
     PAGE("Page"),
     PEDI("Pedigree"),
     PHON("Phone"),
     PLAC("Place"),
     POST("Postal code"),
-    PROB("Probate"),
+    PROB("Probate", TagType.EVENT),
     PROP("Property"),
     PUBL("Publication"),
     QUAY("Quality of data"),
     REFN("Reference"),
     RELA("Relationship"),
     RELI("Religion"),
-    RESI("Residence"),
+    RESI("Residence", TagType.EVENT),
     RESN("Restriction"),
-    RETI("Retirement"),
+    RETI("Retirement", TagType.EVENT),
     RFN("Record file number"),
     RIN("Record ID number"),
     ROLE("Role"),
@@ -161,10 +158,10 @@ public enum GEDTag implements NamedTag {
      * Added in 5.5.1.
      */
     ROMN("Romanized"),
-    SEX("Gender"),
-    SLGC("LDS sealing child"),
-    SLGS("LDS sealing spouse"),
-    SOUR("Source"),
+    SEX("Gender", TagType.FACT),
+    SLGC("LDS sealing child", TagType.EVENT),
+    SLGS("LDS sealing spouse", TagType.EVENT),
+    SOUR("Source", TagType.SOURCE),
     SPFX("Family name prefix"),
     SSN("Social security number"),
     STAE("State"),
@@ -187,7 +184,7 @@ public enum GEDTag implements NamedTag {
      */
     WAC("LDS washing and clothing"),
     WIFE("Wife"),
-    WILL("Will"),
+    WILL("Will", TagType.EVENT),
     /**
      * Added in 5.5.1.
      *
@@ -198,9 +195,15 @@ public enum GEDTag implements NamedTag {
     WWW("Website");
 
     private final String formal;
+    private final TagType type;
 
     private GEDTag(final String formal) {
+        this(formal, TagType.OTHER);
+    }
+
+    private GEDTag(final String formal, final TagType type) {
         this.formal = formal;
+        this.type = type;
     }
 
     private final static List<Property> CUSTOM_TAGS = new ArrayList<Property>(0);
@@ -248,8 +251,29 @@ public enum GEDTag implements NamedTag {
         return formal;
     }
 
+    /**
+     * Get the type of this GEDTag.
+     */
+    @Override
+    public TagType getType() {
+        return type;
+    }
+
     @Override
     public boolean equals(final Property property) {
         return getString().equals(property.getString());
+    }
+
+    /**
+     * Represents a tag type.
+     *
+     * @author UndeadScythes
+     */
+    public enum TagType {
+        EVENT,
+        FACT,
+        SOURCE,
+        OTHER,
+        CUSTOM;
     }
 }
