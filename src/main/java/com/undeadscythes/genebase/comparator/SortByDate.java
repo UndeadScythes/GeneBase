@@ -1,9 +1,12 @@
 package com.undeadscythes.genebase.comparator;
 
 import com.undeadscythes.genebase.structure.Date;
-import com.undeadscythes.genebase.structure.*;
-import com.undeadscythes.metaturtle.metadata.*;
-import java.util.*;
+import com.undeadscythes.genebase.structure.Event;
+import com.undeadscythes.metaturtle.exception.NoMetadataSetException;
+import com.undeadscythes.metaturtle.metadata.Metadata;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Compare two {@link Event}s by date.
@@ -43,8 +46,18 @@ public final class SortByDate implements Comparator<Metadata> {
     }
 
     public int compare(final Metadata event1, final Metadata event2) {
-        final Date date1 = ((Event)event1).getDate();
-        final Date date2 = ((Event)event2).getDate();
+        final Date date1;
+        try {
+            date1 = ((Event)event1).getDate();
+        } catch (NoMetadataSetException ex) {
+            return -1;
+        }
+        final Date date2;
+        try {
+            date2 = ((Event)event2).getDate();
+        } catch (NoMetadataSetException ex) {
+            return 1;
+        }
         return increasing ? compare(date1, date2) : compare(date2, date1);
     }
 
