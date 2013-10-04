@@ -1,5 +1,6 @@
 package com.undeadscythes.genebase.gedcom;
 
+import com.undeadscythes.genebase.gedcom.GEDTag.TagType;
 import com.undeadscythes.metaturtle.metadata.Property;
 
 /**
@@ -45,5 +46,10 @@ public class CustomTag implements NamedTag {
     @Override
     public boolean equals(final Property property) {
         return tag.equals(property.getString());
+    }
+
+    @Override
+    public TagType getType() {
+        return TagType.CUSTOM;
     }
 }
