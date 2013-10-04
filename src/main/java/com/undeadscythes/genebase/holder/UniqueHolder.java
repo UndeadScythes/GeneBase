@@ -117,10 +117,10 @@ public class UniqueHolder extends UniqueMeta {
     /**
      * Get a list of {@link Metadata} with a given property {@link TagType}.
      */
-    public List<Metadata> getListByType(final TagType type) {
-        final List<Metadata> list = new ArrayList<Metadata>(0);
+    public List<Holder> getListByType(final TagType type) {
+        final List<Holder> list = new ArrayList<Holder>(0);
         for (Metadata data : this) {
-            if (GEDTag.getByName(data.getProperty().toString()).getType().equals(type)) list.add(data);
+            if (((NamedTag)data.getProperty()).getType().equals(type)) list.add((Holder)data);
         }
         return list;
     }
