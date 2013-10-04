@@ -6,9 +6,15 @@ package com.undeadscythes.genebase.specific;
  * @author UndeadScythes
  */
 public enum Gender {
-    MALE,
-    FEMALE,
-    UNKNOWN;
+    MALE("Male"),
+    FEMALE("Female"),
+    UNKNOWN("Unknown");
+
+    public String formal;
+
+    private Gender(final String formal) {
+        this.formal = formal;
+    }
 
     /**
      * Get a gender from the value stored in a {@link GEDCOM}.
@@ -17,5 +23,10 @@ public enum Gender {
         if ("M".equals(string)) return MALE;
         if ("F".equals(string)) return FEMALE;
         return UNKNOWN;
+    }
+
+    @Override
+    public String toString() {
+        return formal;
     }
 }
