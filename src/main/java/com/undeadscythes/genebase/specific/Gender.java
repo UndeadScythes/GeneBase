@@ -1,5 +1,8 @@
 package com.undeadscythes.genebase.specific;
 
+import com.undeadscythes.genebase.gedcom.GEDCOM;
+import com.undeadscythes.genebase.record.Individual;
+
 /**
  * The gender of an {@link Individual}.
  *
